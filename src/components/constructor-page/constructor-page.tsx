@@ -35,15 +35,7 @@ const ConstructorPage: FC<ConstructorPageProps> = ({ data }) => {
 
   return (
     <>
-      <article
-        className={styles.wrapper}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-          margin: "0 20px",
-        }}
-      >
+      <article className={styles.wrapper}>
         <h1 className={styles.title}>Соберите бургер</h1>
         <div
           style={{

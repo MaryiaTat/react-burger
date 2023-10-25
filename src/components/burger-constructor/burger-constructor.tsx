@@ -38,7 +38,7 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
       <ConstructorElement
         type="top"
         isLocked={true}
-        text={randomBun[0].name}
+        text={`${randomBun[0].name} (верх)`}
         price={randomBun[0].price}
         thumbnail={randomBun[0].image}
       />
@@ -55,7 +55,7 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
       <ConstructorElement
         type="bottom"
         isLocked={true}
-        text={randomBun[0].name}
+        text={`${randomBun[0].name} (низ)`}
         price={randomBun[0].price}
         thumbnail={randomBun[0].image}
       />
