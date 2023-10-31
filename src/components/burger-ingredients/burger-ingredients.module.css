@@ -1,0 +1,31 @@
+.burger_ingredients_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+.tabs {
+  display: flex;
+  flex-direction: row;
+}
+.ingredients {
+  overflow-y: auto;
+  max-height: calc(100vh - 308px);
+  margin-top: 40px;
+}
+.ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+/* Задание цвета фона скроллбара */
+.ingredients::-webkit-scrollbar-track {
+  background: inherit;
+}
+/* Задание цвета полосы прокрутки скроллбара */
+.ingredients::-webkit-scrollbar-thumb {
+  background: var(--text-inactive-color);
+}
+.category_wrapper {
+  display: grid;
+  grid-column-gap: 24px;
+  grid-row-gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+}

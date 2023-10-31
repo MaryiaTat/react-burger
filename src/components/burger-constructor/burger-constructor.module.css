@@ -1,0 +1,46 @@
+.burger_constructor_wrapper {
+  margin-bottom: 52px;
+}
+.burger_filling {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  max-height: calc(100vh - 556px);
+  margin: 16px 0;
+  padding: 0 8px;
+  width: 100%;
+}
+.burger_filling::-webkit-scrollbar {
+  width: 8px;
+}
+/* Задание цвета фона скроллбара */
+.burger_filling::-webkit-scrollbar-track {
+  background: inherit;
+}
+/* Задание цвета полосы прокрутки скроллбара */
+.burger_filling::-webkit-scrollbar-thumb {
+  background: var(--text-inactive-color);
+}
+.price_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.price {
+  font-family: "Iceland";
+  font-size: 3rem;
+  margin-right: 8px;
+  line-height: 36px;
+}
+.icon svg {
+  width: 36px;
+  height: 36px;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: flex-end;
+  margin: 40px 8px 0 0;
+}

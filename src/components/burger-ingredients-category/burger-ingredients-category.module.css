@@ -1,0 +1,19 @@
+.category_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-family: "Jet Brains Mono";
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.875rem;
+  align-self: flex-start;
+  margin: 0;
+}
+.ingredients_wrapper {
+  display: grid;
+  grid-column-gap: 24px;
+  grid-row-gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  margin: 24px 0 40px 16px;
+}
