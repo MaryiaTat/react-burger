@@ -1,0 +1,9 @@
+.burger_filling {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  max-height: calc(100vh - 556px);
+  margin: 16px 0;
+  width: 100%;
+}

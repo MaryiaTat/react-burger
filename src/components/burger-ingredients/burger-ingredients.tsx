@@ -1,23 +1,37 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useInView } from "react-intersection-observer";
 import styles from "./burger-ingredients.module.css";
 // Components
 import BurgerIngredientsCategory from "../burger-ingredients-category/burger-ingredients-category";
 // Constants
-import { IngredientsVariant } from "./burger-ingredients.constants";
-import { IngredientProps } from "../app/appTypes";
+import { IngredientsVariant } from "../../utils/constants";
+import { IngredientProps, ConstructorFillingTypes } from "../../utils/types";
+import { useAppSelector } from "../../services/hooks";
 
 interface BurgerIngredientsProps {
   ingredients: Array<IngredientProps>;
   onClickDetailInfo: (id: string) => void;
-  openModal: () => void;
 }
 
 const BurgerIngredients: FC<BurgerIngredientsProps> = ({
   ingredients,
   onClickDetailInfo,
-  openModal,
 }) => {
+  const { bun, constructorFilling } = useAppSelector(
+    (store) => store.constructorIngredients
+  );
+  const burgerElementsId = useMemo(
+    () => [
+      bun,
+      ...constructorFilling?.map(
+        (item: ConstructorFillingTypes) => item.elementId
+      ),
+      bun,
+    ],
+    [bun, constructorFilling]
+  );
+
   const [currentTabValue, setCurrentTabValue] = useState(
     IngredientsVariant.BUN.toString()
   );
@@ -31,6 +45,27 @@ const BurgerIngredients: FC<BurgerIngredientsProps> = ({
     { id: 2, title: "Соусы", category: IngredientsVariant.SAUCE },
     { id: 3, title: "Начинки", category: IngredientsVariant.FILLINGS },
   ];
+  const [refBun, inViewBun] = useInView({
+    threshold: 0.3,
+  });
+  const [refSauce, inViewSauce] = useInView({
+    threshold: 0.7,
+  });
+  const [refMain, inViewMain] = useInView({
+    threshold: 0.3,
+  });
+
+  useEffect(() => {
+    if (inViewBun) {
+      setCurrentTabValue(IngredientsVariant.BUN);
+    }
+    if (inViewSauce) {
+      setCurrentTabValue(IngredientsVariant.SAUCE);
+    }
+    if (inViewMain) {
+      setCurrentTabValue(IngredientsVariant.FILLINGS);
+    }
+  }, [inViewBun, inViewSauce, inViewMain]);
 
   return (
     <section className={styles.burger_ingredients_wrapper}>
@@ -62,11 +97,18 @@ const BurgerIngredients: FC<BurgerIngredientsProps> = ({
           <BurgerIngredientsCategory
             key={el.id}
             id={el.category}
+            innerRef={
+              el.category === IngredientsVariant.BUN
+                ? refBun
+                : el.category === IngredientsVariant.SAUCE
+                ? refSauce
+                : refMain
+            }
             category={el.category}
             title={el.title}
             data={ingredients}
-            openModal={openModal}
             onClickDetailInfo={onClickDetailInfo}
+            burgerElementsId={burgerElementsId}
           />
         ))}
       </article>
