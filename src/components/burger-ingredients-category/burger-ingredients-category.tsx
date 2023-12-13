@@ -4,26 +4,28 @@ import styles from "./burger-ingredients-category.module.css";
 // Components
 import BurgerIngredientCard from "../burger-ingredient-card/burger-ingredient-card";
 // Constants
-import { IngredientProps } from "../app/appTypes";
+import { IngredientProps } from "../../utils/types";
 
 interface PropsT {
   title: string;
   data: IngredientProps[];
   category: string;
   id: string;
-  openModal: () => void;
+  innerRef: any;
+  burgerElementsId: string[];
   onClickDetailInfo: (id: string) => void;
 }
 
 const BurgerIngredientsCategory: FC<PropsT> = ({
   id,
+  innerRef,
   title,
   data,
   category,
-  openModal,
+  burgerElementsId,
   onClickDetailInfo,
 }) => (
-  <section id={id} className={styles.category_wrapper}>
+  <section ref={innerRef} id={id} className={styles.category_wrapper}>
     <h2 className={styles.title}>{title}</h2>
     <div className={styles.ingredients_wrapper}>
       {data
@@ -35,8 +37,9 @@ const BurgerIngredientsCategory: FC<PropsT> = ({
             image={item.image}
             price={item.price}
             name={item.name}
+            type={item.type}
             onClickDetailInfo={onClickDetailInfo}
-            openModal={openModal}
+            burgerElementsId={burgerElementsId}
           />
         ))}
     </div>

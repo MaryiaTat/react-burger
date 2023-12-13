@@ -1,67 +1,114 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
+import { useDrop } from "react-dnd";
+// Components
 import {
   ConstructorElement,
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { IngredientProps } from "../app/appTypes";
-import { IngredientsVariant } from "../burger-ingredients/burger-ingredients.constants";
+import {
+  IngredientStub,
+  IngredientStubTypes,
+} from "../ingredient-stub/ingredient-stub";
+// Utils
+import { IngredientProps, ConstructorFillingTypes } from "../../utils/types";
+import { DragDropVariables } from "../../utils/constants";
+// Actions
+import { addConstructorIngredientBun } from "../../services/burgerConstructor/actions";
+import { postOrder } from "../../services/order/actions";
+// Hooks
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
+// Styles
 import styles from "./burger-constructor.module.css";
 
 interface BurgerConstructorProps {
   ingredients: Array<IngredientProps>;
-  openModal: () => void;
+  children: JSX.Element;
 }
 
+type DropTypes = {
+  id: string;
+};
+
 const BurgerConstructor: FC<BurgerConstructorProps> = ({
-  openModal,
   ingredients,
+  children,
 }) => {
-  const getRandomElements = (array: Array<IngredientProps>, count: number) => {
-    const randomElements = array
-      .map((element: IngredientProps) => element)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, count);
-    return randomElements;
+  const dispatch = useAppDispatch();
+  const { bun, constructorFilling } = useAppSelector(
+    (store) => store.constructorIngredients
+  );
+  const [{ isOver }, dropRef] = useDrop({
+    accept: DragDropVariables.BUN,
+    drop(item: DropTypes) {
+      dispatch(addConstructorIngredientBun(item?.id));
+    },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
+  });
+
+  const currentBun = useMemo(
+    () => ingredients?.find((obj) => obj._id === bun),
+    [ingredients, bun]
+  );
+  const currentFilling: string[] = useMemo(
+    () =>
+      constructorFilling?.map((el: ConstructorFillingTypes) => el.elementId),
+    [constructorFilling]
+  );
+  const currentBurger = useMemo(
+    () => (bun ? [bun, ...currentFilling, bun] : [...currentFilling]),
+    [currentFilling, bun]
+  );
+
+  const totalPrice = useMemo(() => {
+    const currentBurgerIngredients = currentBurger?.map((item: string) =>
+      ingredients?.find((ing) => item === ing._id)
+    );
+    return currentBurgerIngredients?.reduce(
+      (acc, item) => (item ? acc + item?.price : 0),
+      0
+    );
+  }, [currentBurger, ingredients]);
+
+  const postOrderModal = () => {
+    dispatch(postOrder({ ingredients: currentBurger }));
   };
-  const randomIngredients = getRandomElements(
-    ingredients?.filter((item) => item.type !== IngredientsVariant.BUN),
-    6
-  );
-  const randomBun = getRandomElements(
-    ingredients?.filter((item) => item.type === IngredientsVariant.BUN),
-    1
-  );
 
   return (
     <section className={styles.burger_constructor_wrapper}>
-      <ConstructorElement
-        type="top"
-        isLocked={true}
-        text={`${randomBun[0].name} (верх)`}
-        price={randomBun[0].price}
-        thumbnail={randomBun[0].image}
-      />
-      <div className={styles.burger_filling}>
-        {randomIngredients?.map((el) => (
+      <div ref={dropRef}>
+        {currentBun ? (
           <ConstructorElement
-            key={el._id}
-            text={el.name}
-            price={el.price}
-            thumbnail={el.image}
+            type="top"
+            isLocked={true}
+            text={`${currentBun.name} (верх)`}
+            price={currentBun.price}
+            thumbnail={currentBun.image}
+            extraClass={styles.buns}
           />
-        ))}
+        ) : (
+          <IngredientStub type={IngredientStubTypes.TOP} isOver={isOver} />
+        )}
       </div>
-      <ConstructorElement
-        type="bottom"
-        isLocked={true}
-        text={`${randomBun[0].name} (низ)`}
-        price={randomBun[0].price}
-        thumbnail={randomBun[0].image}
-      />
+      {children}
+      {currentBun ? (
+        <ConstructorElement
+          type="bottom"
+          isLocked={true}
+          text={`${currentBun.name} (низ)`}
+          price={currentBun.price}
+          thumbnail={currentBun.image}
+          extraClass={styles.buns}
+        />
+      ) : (
+        <IngredientStub type={IngredientStubTypes.BOTTOM} isOver={isOver} />
+      )}
+
       <footer className={styles.footer}>
         <div className={styles.price_wrapper}>
-          <span className={styles.price}>610</span>
+          <span className={styles.price}>{totalPrice}</span>
           <div className={styles.icon}>
             <CurrencyIcon type="primary" />
           </div>
@@ -70,7 +117,7 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
           htmlType="button"
           type="primary"
           size="large"
-          onClick={openModal}
+          onClick={postOrderModal}
         >
           Оформить заказ
         </Button>

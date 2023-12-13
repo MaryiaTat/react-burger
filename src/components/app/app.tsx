@@ -1,23 +1,15 @@
-import { FC, useState, useEffect } from "react";
-import "./app.css";
+import { FC } from "react";
+// Components
 import AppHeader from "../app-header/app-header";
 import ConstructorPage from "../constructor-page/constructor-page";
-import { getIngredients } from "../../utils/burger-api";
+// Styles
+import "./app.css";
 
-const App: FC = () => {
-  const [data, setData] = useState();
-  useEffect(() => {
-    getIngredients()
-      .then(({ data }) => setData(data))
-      .catch((error) => console.error(error));
-  }, []);
-
-  return (
-    <div className="App">
-      <AppHeader />
-      {data && <ConstructorPage data={data} />}
-    </div>
-  );
-};
+const App: FC = () => (
+  <div className="App">
+    <AppHeader />
+    <ConstructorPage />
+  </div>
+);
 
 export default App;

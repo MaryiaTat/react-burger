@@ -1,5 +1,6 @@
 .burger_constructor_wrapper {
   margin-bottom: 52px;
+  max-width: 536px;
 }
 .burger_filling {
   display: flex;
@@ -43,4 +44,7 @@
   gap: 40px;
   justify-content: flex-end;
   margin: 40px 8px 0 0;
+}
+.buns {
+  padding-left: 32px;
 }

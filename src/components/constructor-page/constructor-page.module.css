@@ -1,4 +1,4 @@
-.wrapper {
+.article {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -11,4 +11,10 @@
   line-height: 2.5rem;
   align-self: flex-start;
   margin: 40px 0 0 0;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: space-between;
 }

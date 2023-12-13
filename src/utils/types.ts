@@ -12,3 +12,13 @@ export interface IngredientProps {
   image_large: string;
   __v: number;
 }
+
+export interface ConstructorFillingTypes {
+  id: string;
+  elementId: string;
+}
+
+export interface Action {
+  type: string;
+  payload: any;
+}
