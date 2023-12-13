@@ -4,7 +4,7 @@ export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
 export const INGREDIENTS_LOADING = "INGREDIENTS_LOADING";
 export const INGREDIENTS_ERROR = "INGREDIENTS_ERROR";
 
-export const getIndredients = () => (dispatch) => {
+export const getIngredients = () => (dispatch) => {
   dispatch({ type: INGREDIENTS_LOADING });
   return getIngredientsAPI()
     .then((res) => {

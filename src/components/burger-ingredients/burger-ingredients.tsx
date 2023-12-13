@@ -9,6 +9,12 @@ import { IngredientsVariant } from "../../utils/constants";
 import { IngredientProps, ConstructorFillingTypes } from "../../utils/types";
 import { useAppSelector } from "../../services/hooks";
 
+const burgerIngredientsStructure = [
+  { id: 1, title: "Булки", category: IngredientsVariant.BUN },
+  { id: 2, title: "Соусы", category: IngredientsVariant.SAUCE },
+  { id: 3, title: "Начинки", category: IngredientsVariant.FILLINGS },
+];
+
 interface BurgerIngredientsProps {
   ingredients: Array<IngredientProps>;
   onClickDetailInfo: (id: string) => void;
@@ -40,11 +46,6 @@ const BurgerIngredients: FC<BurgerIngredientsProps> = ({
     const element = document.getElementById(value);
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
-  const burgerIngredientsStructure = [
-    { id: 1, title: "Булки", category: IngredientsVariant.BUN },
-    { id: 2, title: "Соусы", category: IngredientsVariant.SAUCE },
-    { id: 3, title: "Начинки", category: IngredientsVariant.FILLINGS },
-  ];
   const [refBun, inViewBun] = useInView({
     threshold: 0.3,
   });
@@ -66,6 +67,12 @@ const BurgerIngredients: FC<BurgerIngredientsProps> = ({
       setCurrentTabValue(IngredientsVariant.FILLINGS);
     }
   }, [inViewBun, inViewSauce, inViewMain]);
+
+  const currentRef = (category: string) => {
+    if (category === IngredientsVariant.BUN) return refBun;
+    else if (category === IngredientsVariant.SAUCE) return refSauce;
+    else return refMain;
+  };
 
   return (
     <section className={styles.burger_ingredients_wrapper}>
@@ -97,13 +104,7 @@ const BurgerIngredients: FC<BurgerIngredientsProps> = ({
           <BurgerIngredientsCategory
             key={el.id}
             id={el.category}
-            innerRef={
-              el.category === IngredientsVariant.BUN
-                ? refBun
-                : el.category === IngredientsVariant.SAUCE
-                ? refSauce
-                : refMain
-            }
+            innerRef={currentRef(el.category)}
             category={el.category}
             title={el.title}
             data={ingredients}

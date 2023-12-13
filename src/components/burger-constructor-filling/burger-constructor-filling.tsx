@@ -32,8 +32,8 @@ const BurgerConstructorFilling: FC<BurgerConstructorFillingProps> = ({
   ingredients,
 }) => {
   const dispatch = useAppDispatch();
-  const { constructorFilling } = useAppSelector(
-    (store) => store.constructorIngredients
+  const constructorFilling = useAppSelector(
+    (store) => store.constructorIngredients.constructorFilling
   );
   const [{ isOver }, dropRef] = useDrop({
     accept: DragDropVariables.INGREDIENT,

@@ -48,7 +48,7 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
     }),
   });
 
-  const currrentBun = useMemo(
+  const currentBun = useMemo(
     () => ingredients?.find((obj) => obj._id === bun),
     [ingredients, bun]
   );
@@ -79,13 +79,13 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
   return (
     <section className={styles.burger_constructor_wrapper}>
       <div ref={dropRef}>
-        {currrentBun ? (
+        {currentBun ? (
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={`${currrentBun.name} (верх)`}
-            price={currrentBun.price}
-            thumbnail={currrentBun.image}
+            text={`${currentBun.name} (верх)`}
+            price={currentBun.price}
+            thumbnail={currentBun.image}
             extraClass={styles.buns}
           />
         ) : (
@@ -93,13 +93,13 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
         )}
       </div>
       {children}
-      {currrentBun ? (
+      {currentBun ? (
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`${currrentBun.name} (низ)`}
-          price={currrentBun.price}
-          thumbnail={currrentBun.image}
+          text={`${currentBun.name} (низ)`}
+          price={currentBun.price}
+          thumbnail={currentBun.image}
           extraClass={styles.buns}
         />
       ) : (

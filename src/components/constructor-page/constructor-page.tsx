@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 // Actions
-import { getIndredients } from "../../services/ingredients/actions";
+import { getIngredients } from "../../services/ingredients/actions";
 import {
   addIngredient,
   deleteIngredient,
@@ -26,11 +26,13 @@ import { clearConstructor } from "../../services/burgerConstructor/actions";
 const ConstructorPage: FC = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getIndredients());
+    dispatch(getIngredients());
   }, [dispatch]);
   const { ingredients, loading } = useAppSelector((store) => store.ingredients);
-  const { ingredient } = useAppSelector((store) => store.ingredientDetails);
-  const { orderNumber } = useAppSelector((store) => store.order);
+  const ingredient = useAppSelector(
+    (store) => store.ingredientDetails.ingredient
+  );
+  const orderNumber = useAppSelector((store) => store.order.orderNumber);
 
   const handleAddIngredient = (id: string) => {
     const ingredientInfo = ingredients?.find(
@@ -49,25 +51,17 @@ const ConstructorPage: FC = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <article className={styles.wrapper}>
+      <article className={styles.article}>
         <h1 className={styles.title}>Соберите бургер</h1>
         {!loading && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "40px",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className={styles.wrapper}>
             <BurgerIngredients
               ingredients={ingredients}
               onClickDetailInfo={handleAddIngredient}
             />
-            <BurgerConstructor
-              ingredients={ingredients}
-              children={<BurgerConstructorFilling ingredients={ingredients} />}
-            />
+            <BurgerConstructor ingredients={ingredients}>
+              <BurgerConstructorFilling ingredients={ingredients} />
+            </BurgerConstructor>
           </div>
         )}
       </article>
