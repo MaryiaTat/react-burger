@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useDrag } from "react-dnd";
+import { Link, useLocation } from "react-router-dom";
 // Components
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -26,6 +27,8 @@ const BurgerIngredientCard: FC<BurgerIngredientCardProps> = ({
   burgerElementsId,
   onClickDetailInfo,
 }) => {
+  const location = useLocation();
+
   const idCountMap = burgerElementsId.reduce((map: any, id: string) => {
     map.set(id, (map.get(id) || 0) + 1);
     return map;
@@ -45,19 +48,25 @@ const BurgerIngredientCard: FC<BurgerIngredientCardProps> = ({
   };
 
   return (
-    <div
-      className={styles.ingredient_card}
-      ref={dragRef}
-      onClick={handleIngredientCard}
+    <Link
+      to={`/ingredients/${id}`}
+      state={{ background: location }}
+      className={styles.link}
     >
-      <img className={styles.image} src={image} alt="" />
-      <div className={styles.price_info}>
-        <span className={styles.price}>{price}</span>
-        <CurrencyIcon type="primary" />
+      <div
+        className={styles.ingredient_card}
+        ref={dragRef}
+        onClick={handleIngredientCard}
+      >
+        <img className={styles.image} src={image} alt="" />
+        <div className={styles.price_info}>
+          <span className={styles.price}>{price}</span>
+          <CurrencyIcon type="primary" />
+        </div>
+        <p className={styles.ingredient_title}>{name}</p>
+        {count && <Counter count={count} size="default" extraClass="counter" />}
       </div>
-      <p className={styles.ingredient_title}>{name}</p>
-      {count && <Counter count={count} size="default" extraClass="counter" />}
-    </div>
+    </Link>
   );
 };
 

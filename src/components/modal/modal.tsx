@@ -38,7 +38,7 @@ const Modal: FC<ModalProps> = ({ title, children, closeModal }) => {
           </div>
           <ModalOverlay onClose={closeModal} />
         </>,
-        modalRoot
+        modalRoot,
       )
     : null;
 };

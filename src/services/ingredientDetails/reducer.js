@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, DELETE_INGREDIENT } from "./actions";
+import { ADD_INGREDIENT } from "./actions";
 
 export const initialState = {
   ingredient: null,
@@ -10,12 +10,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         ingredient: action.payload,
-      };
-    }
-    case DELETE_INGREDIENT: {
-      return {
-        ...state,
-        ingredient: null,
       };
     }
     default:
