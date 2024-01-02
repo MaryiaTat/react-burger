@@ -13,7 +13,8 @@ const RegisterPage: FC = () => {
     password: "",
   });
 
-  const registerHandler = () => {
+  const registerHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     dispatch(register(userInfo));
   };
 
@@ -49,7 +50,7 @@ const RegisterPage: FC = () => {
       {
         title: "Зарегистрироваться",
         type: "primary",
-        onClick: registerHandler,
+        htmlTypeSubmit: true,
       },
     ],
     notifications: [
@@ -59,6 +60,7 @@ const RegisterPage: FC = () => {
       },
     ],
     showButtons: true,
+    onsubmit: registerHandler,
   };
   return (
     <div>

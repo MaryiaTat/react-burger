@@ -11,7 +11,8 @@ const LoginPage: FC = () => {
     email: "",
     password: "",
   });
-  const entrance = () => {
+  const entrance = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     dispatch(login(userInfo));
   };
   const pageStructure = {
@@ -34,7 +35,7 @@ const LoginPage: FC = () => {
         },
       },
     ],
-    buttons: [{ title: "Войти", type: "primary", onClick: entrance }],
+    buttons: [{ title: "Войти", type: "primary", htmlTypeSubmit: true }],
     notifications: [
       {
         title: "Вы — новый пользователь?",
@@ -46,6 +47,7 @@ const LoginPage: FC = () => {
       },
     ],
     showButtons: true,
+    onsubmit: entrance,
   };
   return <Form structure={pageStructure} />;
 };

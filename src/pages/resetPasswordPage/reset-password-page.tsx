@@ -11,7 +11,8 @@ const ResetPasswordPage: FC = () => {
     password: "",
     token: "",
   });
-  const saveChanges = () => {
+  const saveChanges = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     postResetPasswordApi(userInfo).then(
       (res) => res.success && navigate("/login")
     );
@@ -36,11 +37,12 @@ const ResetPasswordPage: FC = () => {
         },
       },
     ],
-    buttons: [{ title: "Сохранить", type: "primary", onClick: saveChanges }],
+    buttons: [{ title: "Сохранить", type: "primary", htmlTypeSubmit: true }],
     notifications: [
       { title: "Вспомнили пароль?", link: { title: "Войти", url: "/login" } },
     ],
     showButtons: true,
+    onsubmit: saveChanges,
   };
   return <Form structure={pageStructure} />;
 };

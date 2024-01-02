@@ -9,7 +9,8 @@ import { postForgotPasswordApi } from "../../utils/burger-api";
 const ForgotPasswordPage: FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const restorePassword = () => {
+  const restorePassword = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     postForgotPasswordApi({ email: email }).then(
       (res) => res.success && navigate("/reset-password")
     );
@@ -30,13 +31,14 @@ const ForgotPasswordPage: FC = () => {
       {
         title: "Восстановить",
         type: "primary",
-        onClick: restorePassword,
+        htmlTypeSubmit: true,
       },
     ],
     notifications: [
       { title: "Вспомнили пароль?", link: { title: "Войти", url: "/login" } },
     ],
     showButtons: true,
+    onsubmit: restorePassword,
   };
   return <Form structure={pageStructure} />;
 };

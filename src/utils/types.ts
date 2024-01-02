@@ -36,7 +36,7 @@ interface Button {
   title: string;
   type: string;
   htmlTypeSubmit?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 interface Link {
   title: string;
@@ -53,4 +53,5 @@ export interface FormStructure {
   buttons?: Array<Button>;
   notifications?: Array<Notifications>;
   showButtons: boolean;
+  onsubmit: (e: React.SyntheticEvent) => void;
 }

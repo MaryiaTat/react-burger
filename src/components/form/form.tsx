@@ -19,11 +19,11 @@ interface FormProps {
 
 const Form: FC<FormProps> = ({ structure }) => {
   const location = useLocation();
-  const { title, form, buttons, notifications, showButtons } = structure;
+  const { title, form, buttons, notifications, showButtons, onsubmit } = structure;
   return (
     <section className={styles.section}>
       {title && <h2 className={styles.title}>{title}</h2>}
-      <form className={styles.form}>
+      <form onSubmit={onsubmit} className={styles.form}>
         {form.map((item, index) => {
           switch (item.type) {
             case FormConstants.TEXT:
@@ -71,32 +71,32 @@ const Form: FC<FormProps> = ({ structure }) => {
               );
           }
         })}
+        {buttons && showButtons && (
+          <div className={buttons.length > 1 ? styles.buttons : styles.button}>
+            {buttons.map((button, index) =>
+              button.type === "primary" ? (
+                <Button
+                  key={index}
+                  type="primary"
+                  htmlType={button.htmlTypeSubmit ? "submit" : "button"}
+                  onClick={button?.onClick || undefined}
+                >
+                  {button.title}
+                </Button>
+              ) : (
+                <Button
+                  key={index}
+                  type="secondary"
+                  htmlType={button.htmlTypeSubmit ? "submit" : "button"}
+                  onClick={button?.onClick || undefined}
+                >
+                  {button.title}
+                </Button>
+              ),
+            )}
+          </div>
+        )}
       </form>
-      {buttons && showButtons && (
-        <div className={buttons.length > 1 ? styles.buttons : styles.button}>
-          {buttons.map((button, index) =>
-            button.type === "primary" ? (
-              <Button
-                key={index}
-                type="primary"
-                htmlType={button.htmlTypeSubmit ? "submit" : "button"}
-                onClick={button.onClick}
-              >
-                {button.title}
-              </Button>
-            ) : (
-              <Button
-                key={index}
-                type="secondary"
-                htmlType={button.htmlTypeSubmit ? "submit" : "button"}
-                onClick={button.onClick}
-              >
-                {button.title}
-              </Button>
-            ),
-          )}
-        </div>
-      )}
       {notifications && (
         <div className={styles.noteBlock}>
           {notifications.map((el, index) => (

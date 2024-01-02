@@ -21,7 +21,8 @@ const ProfilePage: FC = () => {
   });
   const cancelChanges = () =>
     setUserInfo({ name: user.name, email: user.email, password: "" });
-  const saveChanges = () => {
+  const saveChanges = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     dispatch(updateUserInfo(userInfo));
   };
   const logOutUser = () => {
@@ -70,10 +71,10 @@ const ProfilePage: FC = () => {
         title: "Сохранить",
         type: "primary",
         htmlTypeSubmit: true,
-        onClick: saveChanges,
       },
     ],
     showButtons: isShowButtons,
+    onsubmit: saveChanges,
   };
   return (
     <main className={styles.main}>
