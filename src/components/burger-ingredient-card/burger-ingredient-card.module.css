@@ -28,3 +28,7 @@
   line-height: 1.5rem;
   font-family: "Jet Brains Mono";
 }
+.link {
+  text-decoration: none;
+  color: inherit;
+}
