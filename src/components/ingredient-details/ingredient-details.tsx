@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { getIngredients } from "../../services/ingredients/actions";
-import { IngredientProps } from "../../utils/types";
+import { IIngredientProps } from "../../utils/types";
 import styles from "./ingredient-details.module.css";
 
 interface IngredientDetailsProps {
@@ -18,7 +18,7 @@ const IngredientDetails: FC<IngredientDetailsProps> = ({ header }) => {
   const { ingredients, loading } = useAppSelector((store) => store.ingredients);
 
   const currentIngredient = ingredients?.find(
-    (el: IngredientProps) => el._id === ingredientId,
+    (el: IIngredientProps) => el._id === ingredientId
   );
   const { image, title, calories, proteins, fat, carbohydrates } =
     currentIngredient || {};

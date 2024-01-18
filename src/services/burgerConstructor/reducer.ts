@@ -5,7 +5,7 @@ import {
   CLEAR_CONSTRUCTOR,
   SORT_CONSTRUCTOR_INGREDIENT,
 } from "./actions";
-import { ConstructorFillingTypes, Action } from "../../utils/types";
+import { ConstructorFillingTypes, IAction } from "../../utils/types";
 
 interface InitialStateType {
   bun: null | string;
@@ -17,7 +17,7 @@ export const initialState: InitialStateType = {
   constructorFilling: [],
 };
 
-export const reducer = (state = initialState, action: Action) => {
+export const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case ADD_CONSTRUCTOR_INGREDIENT_FILLING: {
       return {

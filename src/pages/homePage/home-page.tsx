@@ -13,7 +13,7 @@ import Modal from "../../components/modal/modal";
 // Styles
 import styles from "./home-page.module.css";
 // Utils
-import { IngredientProps } from "../../utils/types";
+import { IIngredientProps } from "../../utils/types";
 // Hooks
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { deleteOrder } from "../../services/order/actions";
@@ -29,7 +29,7 @@ const HomePage: FC = () => {
 
   const handleAddIngredient = (id: string) => {
     const ingredientInfo = ingredients?.find(
-      (el: IngredientProps) => el._id === id,
+      (el: IIngredientProps) => el._id === id
     );
     dispatch(addIngredient(ingredientInfo));
   };

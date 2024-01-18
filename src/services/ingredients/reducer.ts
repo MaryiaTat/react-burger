@@ -1,3 +1,4 @@
+import { IAction } from "../../utils/types";
 import {
   GET_INGREDIENTS_SUCCESS,
   INGREDIENTS_LOADING,
@@ -10,7 +11,7 @@ export const initialState = {
   error: null,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case INGREDIENTS_LOADING: {
       return {

@@ -34,14 +34,11 @@ const App: FC = () => {
     <div className="App">
       <AppHeader />
       <Routes location={background || location}>
-        {/* роуты доступные для всех  */}
         <Route path="/" element={<HomePage />} />
         <Route
           path="ingredients/:ingredientId"
           element={<IngredientDetails header="Детали ингредиента" />}
         />
-        {/* / */}
-
         <Route
           path="register"
           element={<OnlyUnAuth component={<RegisterPage />} />}

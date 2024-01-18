@@ -6,7 +6,7 @@ import styles from "./burger-ingredients.module.css";
 import BurgerIngredientsCategory from "../burger-ingredients-category/burger-ingredients-category";
 // Constants
 import { IngredientsVariant } from "../../utils/constants";
-import { IngredientProps, ConstructorFillingTypes } from "../../utils/types";
+import { IIngredientProps, ConstructorFillingTypes } from "../../utils/types";
 import { useAppSelector } from "../../services/hooks";
 
 const burgerIngredientsStructure = [
@@ -16,7 +16,7 @@ const burgerIngredientsStructure = [
 ];
 
 interface BurgerIngredientsProps {
-  ingredients: Array<IngredientProps>;
+  ingredients: Array<IIngredientProps>;
   onClickDetailInfo: (id: string) => void;
 }
 

@@ -4,7 +4,7 @@ import { useAppSelector } from "../../services/hooks";
 
 interface ProtectedProps {
   onlyUnAuthUsers?: boolean;
-  component: any;
+  component: JSX.Element | null;
 }
 
 const Protected: FC<ProtectedProps> = ({

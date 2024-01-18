@@ -1,3 +1,4 @@
+import { IAction } from "../../utils/types";
 import {
   SET_USER,
   SET_IS_AUTH_CHECKED,
@@ -12,7 +13,7 @@ export const initialState = {
   isAuthChecked: false,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_USER:
       return {

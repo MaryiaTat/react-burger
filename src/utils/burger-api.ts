@@ -1,13 +1,23 @@
 import { checkResponse } from "./utils";
+import {
+  IUserAllInfo,
+  ILoginUserInfo,
+  ILogin,
+  IAllOrderInfo,
+  IUpdate,
+  IForgotPassword,
+  IIngredients,
+} from "./types";
 
 const API = "https://norma.nomoreparties.space/api";
 
-const request = (url, options) => fetch(url, options).then(checkResponse);
+const request = <T>(url: string, options?: Record<string, any>): Promise<T> =>
+  fetch(url, options).then(checkResponse<T>);
 
-export const getIngredientsAPI = () =>
+export const getIngredientsAPI = (): Promise<IIngredients> =>
   request(`${API}/ingredients`);
 
-export const refreshToken = () => {
+export const refreshToken = (): Promise<ILogin> => {
   return request(`${API}/auth/token`, {
     method: "POST",
     headers: {
@@ -20,12 +30,15 @@ export const refreshToken = () => {
   });
 };
 
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async <T>(
+  url: string,
+  options: Record<string, any>
+): Promise<T> => {
   try {
     const res = await fetch(url, options);
     return await checkResponse(res);
   } catch (err) {
-    if (err.message === "jwt expired") {
+    if (err instanceof Error && err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
       if (!refreshData.success) {
         return Promise.reject(refreshData);
@@ -41,7 +54,9 @@ export const fetchWithRefresh = async (url, options) => {
   }
 };
 
-export const postOrderApi = (content) => {
+export const postOrderApi = (content: {
+  ingredients: Array<string>;
+}): Promise<IAllOrderInfo> => {
   return fetchWithRefresh(`${API}/orders`, {
     method: "POST",
     headers: {
@@ -52,7 +67,9 @@ export const postOrderApi = (content) => {
   });
 };
 
-export const postForgotPasswordApi = (content) => {
+export const postForgotPasswordApi = (content: {
+  email: string;
+}): Promise<IForgotPassword> => {
   return request(`${API}/password-reset`, {
     method: "POST",
     headers: {
@@ -63,7 +80,10 @@ export const postForgotPasswordApi = (content) => {
   });
 };
 
-export const postResetPasswordApi = (content) => {
+export const postResetPasswordApi = (content: {
+  password: string;
+  token: string;
+}): Promise<IForgotPassword> => {
   return request(`${API}/password-reset/reset`, {
     method: "POST",
     headers: {
@@ -74,7 +94,7 @@ export const postResetPasswordApi = (content) => {
   });
 };
 
-export const postRegisterApi = (content) => {
+export const postRegisterApi = (content: IUserAllInfo): Promise<ILogin> => {
   return request(`${API}/auth/register`, {
     method: "POST",
     headers: {
@@ -85,7 +105,7 @@ export const postRegisterApi = (content) => {
   });
 };
 
-export const postLoginApi = (content) => {
+export const postLoginApi = (content: ILoginUserInfo): Promise<ILogin> => {
   return request(`${API}/auth/login`, {
     method: "POST",
     headers: {
@@ -96,7 +116,7 @@ export const postLoginApi = (content) => {
   });
 };
 
-export const postLogoutApi = () => {
+export const postLogoutApi = (): Promise<IForgotPassword> => {
   return request(`${API}/auth/logout`, {
     method: "POST",
     headers: {
@@ -109,7 +129,7 @@ export const postLogoutApi = () => {
   });
 };
 
-export const getUserApi = () => {
+export const getUserApi = (): Promise<IUpdate> => {
   return fetchWithRefresh(`${API}/auth/user`, {
     method: "GET",
     headers: {
@@ -119,7 +139,7 @@ export const getUserApi = () => {
   });
 };
 
-export const getUpdateUserApi = (content) => {
+export const getUpdateUserApi = (content: IUserAllInfo): Promise<IUpdate> => {
   return fetchWithRefresh(`${API}/auth/user`, {
     method: "PATCH",
     headers: {

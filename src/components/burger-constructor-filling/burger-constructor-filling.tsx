@@ -1,25 +1,25 @@
-import { FC } from 'react';
-import { useDrop } from 'react-dnd';
-import { v4 as uuidv4 } from 'uuid';
+import { FC } from "react";
+import { useDrop } from "react-dnd";
+import { v4 as uuidv4 } from "uuid";
 // Components
-import BurgerConstructorElement from '../burger-constructor-element/burger-constructor-element';
-import { IngredientStub } from '../ingredient-stub/ingredient-stub';
+import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
+import { IngredientStub } from "../ingredient-stub/ingredient-stub";
 // Types
-import { IngredientProps } from '../../utils/types';
+import { IIngredientProps } from "../../utils/types";
 // Styles
-import styles from './burger-constructor-filling.module.css';
+import styles from "./burger-constructor-filling.module.css";
 // Hooks
-import { useAppDispatch, useAppSelector } from '../../services/hooks';
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 // Actions
-import { addConstructorIngredientFilling } from '../../services/burgerConstructor/actions';
+import { addConstructorIngredientFilling } from "../../services/burgerConstructor/actions";
 // Constants
-import { DragDropVariables } from '../../utils/constants';
+import { DragDropVariables } from "../../utils/constants";
 
 interface BurgerConstructorFillingProps {
-  ingredients: Array<IngredientProps>;
+  ingredients: Array<IIngredientProps>;
 }
 
-interface ConstructorElementProps {
+export interface IConstructorElementProps {
   id: string;
   elementId: string;
 }
@@ -33,13 +33,13 @@ const BurgerConstructorFilling: FC<BurgerConstructorFillingProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const constructorFilling = useAppSelector(
-    (store) => store.constructorIngredients.constructorFilling,
+    (store) => store.constructorIngredients.constructorFilling
   );
   const [{ isOver }, dropRef] = useDrop({
     accept: DragDropVariables.INGREDIENT,
     drop(item: DragObject) {
       dispatch(
-        addConstructorIngredientFilling({ id: uuidv4(), elementId: item?.id }),
+        addConstructorIngredientFilling({ id: uuidv4(), elementId: item?.id })
       );
     },
     collect: (monitor) => ({
@@ -53,9 +53,9 @@ const BurgerConstructorFilling: FC<BurgerConstructorFillingProps> = ({
         <IngredientStub isOver={isOver} />
       ) : (
         constructorFilling.map(
-          (ingredient: ConstructorElementProps, index: number) => {
+          (ingredient: IConstructorElementProps, index: number) => {
             const element = ingredients?.find(
-              (obj) => obj._id === ingredient.elementId,
+              (obj) => obj._id === ingredient.elementId
             );
             if (element) {
               return (
@@ -69,7 +69,7 @@ const BurgerConstructorFilling: FC<BurgerConstructorFillingProps> = ({
             } else {
               return null;
             }
-          },
+          }
         )
       )}
     </div>
