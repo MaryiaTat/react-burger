@@ -9,3 +9,9 @@ export enum DragDropVariables {
   BUN = "bun",
   INGREDIENT = "ingredient",
 }
+
+export enum FormConstants {
+  TEXT = "text",
+  EMAIL = "email",
+  PASSWORD = "password",
+}

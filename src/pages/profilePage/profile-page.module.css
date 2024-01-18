@@ -1,0 +1,64 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 60px;
+  max-width: 1240px;
+  margin-top: 120px;
+  width: 100%;
+}
+.aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 80px;
+  max-width: 320px;
+}
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.link {
+  font-family: "Jet Brains Mono";
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.875rem;
+  text-decoration: none;
+  padding: 0;
+  margin: 17px 0;
+  color: #8585ad;
+  max-width: 320px;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  padding: 0 20px;
+}
+.link:hover {
+  color: #f2f2f3;
+}
+.note {
+  font-family: "Jet Brains Mono";
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #8585ad;
+  margin: 0;
+  text-align: left;
+  opacity: 0.4;
+  padding-left: 20px;
+}
+.active {
+  font-family: "Jet Brains Mono";
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.875rem;
+  text-decoration: none;
+  padding: 0;
+  margin: 17px 0;
+  color: #f2f2f3;
+  max-width: 320px;
+  padding: 0 20px;
+}
+.fragment {
+  padding-right: 20px;
+}

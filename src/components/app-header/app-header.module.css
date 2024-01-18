@@ -7,6 +7,13 @@
   justify-content: center;
 }
 
+.link {
+  text-decoration: none;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+}
+
 .navigation {
   display: grid;
   grid-template-columns: auto auto 1fr auto;
@@ -17,19 +24,23 @@
 }
 
 .a {
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
+  color: #8585ad;
+}
+.active {
+  color: #f2f2f3;
 }
 
 .span {
   font-size: 1rem;
   line-height: 1.5rem;
-  color: #f2f2f3;
+  color: #8585ad;
   margin-left: 8px;
   font-family: "Jet Brains Mono";
 }
-.span:hover {
-  color: var(--text-inactive-color);
+.active_span {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #f2f2f3;
+  margin-left: 8px;
+  font-family: "Jet Brains Mono";
 }

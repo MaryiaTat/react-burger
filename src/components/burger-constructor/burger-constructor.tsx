@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC, useMemo, useState } from "react";
 import { useDrop } from "react-dnd";
 // Components
 import {
@@ -10,6 +10,9 @@ import {
   IngredientStub,
   IngredientStubTypes,
 } from "../ingredient-stub/ingredient-stub";
+import OrderLoader from "../order-loader/order-loader";
+import Modal from "../modal/modal";
+import { OnlyAuth } from "../protected-route/protected-route";
 // Utils
 import { IngredientProps, ConstructorFillingTypes } from "../../utils/types";
 import { DragDropVariables } from "../../utils/constants";
@@ -35,6 +38,11 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
   children,
 }) => {
   const dispatch = useAppDispatch();
+  const loading = useAppSelector((store) => store.order.loading);
+  const user = useAppSelector((store) => store.user.user);
+
+  const [isUserAuth, setIsUserAuth] = useState<boolean>(false);
+  const [showLoader, setShowLoader] = useState<boolean>(true);
   const { bun, constructorFilling } = useAppSelector(
     (store) => store.constructorIngredients
   );
@@ -63,8 +71,8 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
   );
 
   const totalPrice = useMemo(() => {
-    const currentBurgerIngredients = currentBurger?.map((item: string) =>
-      ingredients?.find((ing) => item === ing._id)
+    const currentBurgerIngredients = currentBurger?.map(
+      (item: string) => ingredients?.find((ing) => item === ing._id)
     );
     return currentBurgerIngredients?.reduce(
       (acc, item) => (item ? acc + item?.price : 0),
@@ -73,8 +81,10 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
   }, [currentBurger, ingredients]);
 
   const postOrderModal = () => {
-    dispatch(postOrder({ ingredients: currentBurger }));
+    setIsUserAuth(true);
+    user && dispatch(postOrder({ ingredients: currentBurger }));
   };
+  const closeLoader = () => setShowLoader(false);
 
   return (
     <section className={styles.burger_constructor_wrapper}>
@@ -121,6 +131,17 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
         >
           Оформить заказ
         </Button>
+        {isUserAuth && (
+          <OnlyAuth
+            component={
+              loading && showLoader ? (
+                <Modal closeModal={closeLoader}>
+                  <OrderLoader />
+                </Modal>
+              ) : null
+            }
+          />
+        )}
       </footer>
     </section>
   );
