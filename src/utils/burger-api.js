@@ -2,11 +2,13 @@ import { checkResponse } from "./utils";
 
 const API = "https://norma.nomoreparties.space/api";
 
+const request = (url, options) => fetch(url, options).then(checkResponse);
+
 export const getIngredientsAPI = () =>
-  fetch(`${API}/ingredients`).then(checkResponse);
+  request(`${API}/ingredients`);
 
 export const refreshToken = () => {
-  return fetch(`${API}/auth/token`, {
+  return request(`${API}/auth/token`, {
     method: "POST",
     headers: {
       Authorization: "Basic",
@@ -15,7 +17,7 @@ export const refreshToken = () => {
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  }).then(checkResponse);
+  });
 };
 
 export const fetchWithRefresh = async (url, options) => {
@@ -51,51 +53,51 @@ export const postOrderApi = (content) => {
 };
 
 export const postForgotPasswordApi = (content) => {
-  return fetch(`${API}/password-reset`, {
+  return request(`${API}/password-reset`, {
     method: "POST",
     headers: {
       Authorization: "Basic",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(content),
-  }).then(checkResponse);
+  });
 };
 
 export const postResetPasswordApi = (content) => {
-  return fetch(`${API}/password-reset/reset`, {
+  return request(`${API}/password-reset/reset`, {
     method: "POST",
     headers: {
       Authorization: "Basic",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(content),
-  }).then(checkResponse);
+  });
 };
 
 export const postRegisterApi = (content) => {
-  return fetch(`${API}/auth/register`, {
+  return request(`${API}/auth/register`, {
     method: "POST",
     headers: {
       Authorization: "Basic",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(content),
-  }).then(checkResponse);
+  });
 };
 
 export const postLoginApi = (content) => {
-  return fetch(`${API}/auth/login`, {
+  return request(`${API}/auth/login`, {
     method: "POST",
     headers: {
       Authorization: "Basic",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(content),
-  }).then(checkResponse);
+  });
 };
 
 export const postLogoutApi = () => {
-  return fetch(`${API}/auth/logout`, {
+  return request(`${API}/auth/logout`, {
     method: "POST",
     headers: {
       Authorization: "Basic",
@@ -104,7 +106,7 @@ export const postLogoutApi = () => {
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  }).then(checkResponse);
+  });
 };
 
 export const getUserApi = () => {
