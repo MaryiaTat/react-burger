@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 export interface IIngredientProps {
   _id: string;
@@ -53,7 +53,7 @@ export interface FormStructure {
   buttons?: Array<Button>;
   notifications?: Array<Notifications>;
   showButtons: boolean;
-  onsubmit: (e: React.SyntheticEvent) => void;
+  onsubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
 export interface IUserInfo {

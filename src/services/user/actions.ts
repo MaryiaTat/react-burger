@@ -7,6 +7,7 @@ import {
   getUpdateUserApi,
   postLogoutApi,
 } from "../../utils/burger-api";
+import { AppDispatch } from "../..";
 
 export const SET_USER = "SET_USER";
 export const SET_IS_AUTH_CHECKED = "SET_IS_AUTH_CHECKED";
@@ -80,7 +81,7 @@ export const logOut = () => (dispatch: Dispatch) => {
 };
 
 export const checkUserAuth = () => {
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
         .catch(() => {

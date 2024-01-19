@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 // Components
 import Form from "../../components/form/form";
@@ -9,7 +9,7 @@ import { postForgotPasswordApi } from "../../utils/burger-api";
 const ForgotPasswordPage: FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const restorePassword = (e: React.SyntheticEvent) => {
+  const restorePassword = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postForgotPasswordApi({ email: email }).then(
       (res) => res.success && navigate("/reset-password")

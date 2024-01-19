@@ -11,7 +11,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import ProfilePage from "../../pages/profilePage/profile-page";
 import Modal from "../modal/modal";
 // Styles
-import "./app.css";
+import "./app.module.css";
 import { useAppDispatch } from "../../services/hooks";
 import { checkUserAuth } from "../../services/user/actions";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";

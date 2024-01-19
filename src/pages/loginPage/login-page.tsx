@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from "react";
+import { FC, useState, ChangeEvent, FormEvent } from "react";
 // Actions
 import { login } from "../../services/user/actions";
 // Components
@@ -12,7 +12,7 @@ const LoginPage: FC = () => {
     email: "",
     password: "",
   });
-  const entrance = (e: React.SyntheticEvent) => {
+  const entrance = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login(userInfo));
   };

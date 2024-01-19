@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useState, FormEvent } from "react";
 // Actions
 import { register } from "../../services/user/actions";
 // Components
@@ -13,7 +13,7 @@ const RegisterPage: FC = () => {
     password: "",
   });
 
-  const registerHandler = (e: React.SyntheticEvent) => {
+  const registerHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(register(userInfo));
   };
