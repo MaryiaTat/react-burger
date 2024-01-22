@@ -10,8 +10,9 @@ import ResetPasswordPage from "../../pages/resetPasswordPage/reset-password-page
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import ProfilePage from "../../pages/profilePage/profile-page";
 import Modal from "../modal/modal";
+import { getIngredients } from "../../services/ingredients/actions";
 // Styles
-import "./app.module.css";
+import styles from "./app.module.css";
 import { useAppDispatch } from "../../services/hooks";
 import { checkUserAuth } from "../../services/user/actions";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
@@ -25,13 +26,14 @@ const App: FC = () => {
   // при входе на страницу проверяем токен доступа
   useEffect(() => {
     dispatch(checkUserAuth());
+    dispatch(getIngredients());
   }, [dispatch]);
 
   const handleModalClose = () => {
     navigate(-1);
   };
   return (
-    <div className="App">
+    <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />

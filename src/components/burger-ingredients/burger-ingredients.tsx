@@ -50,7 +50,7 @@ const BurgerIngredients: FC<BurgerIngredientsProps> = ({
     threshold: 0.3,
   });
   const [refSauce, inViewSauce] = useInView({
-    threshold: 0.7,
+    threshold: 0.8,
   });
   const [refMain, inViewMain] = useInView({
     threshold: 0.3,

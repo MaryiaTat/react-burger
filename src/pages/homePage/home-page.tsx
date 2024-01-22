@@ -1,8 +1,7 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 // Actions
-import { getIngredients } from "../../services/ingredients/actions";
 import { addIngredient } from "../../services/ingredientDetails/actions";
 // Components
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
@@ -21,9 +20,6 @@ import { clearConstructor } from "../../services/burgerConstructor/actions";
 
 const HomePage: FC = () => {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
   const { ingredients, loading } = useAppSelector((store) => store.ingredients);
   const orderNumber = useAppSelector((store) => store.order.orderNumber);
 
