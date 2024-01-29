@@ -1,5 +1,5 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC, useState, ChangeEvent } from "react";
+import { FC, useState, ChangeEvent, FormEvent } from "react";
 import { Route, Routes, NavLink } from "react-router-dom";
 // Actions
 import { updateUserInfo, logOut } from "../../services/user/actions";
@@ -21,7 +21,7 @@ const ProfilePage: FC = () => {
   });
   const cancelChanges = () =>
     setUserInfo({ name: user.name, email: user.email, password: "" });
-  const saveChanges = (e: React.SyntheticEvent) => {
+  const saveChanges = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(updateUserInfo(userInfo));
   };

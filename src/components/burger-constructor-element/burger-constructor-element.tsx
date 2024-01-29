@@ -4,7 +4,7 @@ import { useDrag, useDrop } from "react-dnd";
 // Components
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 // Utils
-import { IngredientProps } from "../../utils/types";
+import { IIngredientProps } from "../../utils/types";
 // Styles
 import styles from "./burger-constructor-element.module.css";
 // Actions
@@ -20,7 +20,7 @@ import { useAppDispatch } from "../../services/hooks";
 
 interface BurgerConstructorElementProps {
   ingredient: ConstructorElementProps;
-  element: IngredientProps;
+  element: IIngredientProps;
   index: number;
 }
 
@@ -28,6 +28,11 @@ interface ConstructorElementProps {
   id: string;
   elementId: string;
 }
+
+type TItem = {
+  id: string;
+  index: number;
+};
 
 const BurgerConstructorElement: FC<BurgerConstructorElementProps> = ({
   ingredient,
@@ -40,7 +45,7 @@ const BurgerConstructorElement: FC<BurgerConstructorElementProps> = ({
 
   const [, drop] = useDrop({
     accept: DragDropVariables.ELEMENT,
-    hover: (item: any, monitor) => {
+    hover: (item: TItem, monitor) => {
       if (!ref.current) {
         return;
       }

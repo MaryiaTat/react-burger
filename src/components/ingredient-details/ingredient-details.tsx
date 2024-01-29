@@ -1,8 +1,7 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../services/hooks";
-import { getIngredients } from "../../services/ingredients/actions";
-import { IngredientProps } from "../../utils/types";
+import { useAppSelector } from "../../services/hooks";
+import { IIngredientProps } from "../../utils/types";
 import styles from "./ingredient-details.module.css";
 
 interface IngredientDetailsProps {
@@ -11,20 +10,16 @@ interface IngredientDetailsProps {
 
 const IngredientDetails: FC<IngredientDetailsProps> = ({ header }) => {
   const { ingredientId } = useParams();
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
   const { ingredients, loading } = useAppSelector((store) => store.ingredients);
 
   const currentIngredient = ingredients?.find(
-    (el: IngredientProps) => el._id === ingredientId,
+    (el: IIngredientProps) => el._id === ingredientId
   );
   const { image, title, calories, proteins, fat, carbohydrates } =
     currentIngredient || {};
 
   return !loading ? (
-    <>
+    <div className={styles.wrapper}>
       {header && <h2 className={styles.header}>{header}</h2>}
       <div className={styles.details}>
         <img className={styles.image} src={image} alt="" />
@@ -48,7 +43,7 @@ const IngredientDetails: FC<IngredientDetailsProps> = ({ header }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   ) : null;
 };
 

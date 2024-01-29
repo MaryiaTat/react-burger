@@ -1,3 +1,4 @@
+import { IAction } from "../../utils/types";
 import {
   POST_ORDER_SUCCESS,
   ORDER_LOADING,
@@ -11,7 +12,7 @@ export const initialState = {
   error: null,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case ORDER_LOADING: {
       return {

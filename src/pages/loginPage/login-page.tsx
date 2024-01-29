@@ -1,17 +1,18 @@
-import { FC, useState, ChangeEvent } from "react";
+import { FC, useState, ChangeEvent, FormEvent } from "react";
 // Actions
 import { login } from "../../services/user/actions";
 // Components
 import Form from "../../components/form/form";
 import { useAppDispatch } from "../../services/hooks";
+import { ILoginUserInfo } from "../../utils/types";
 
 const LoginPage: FC = () => {
   const dispatch = useAppDispatch();
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<ILoginUserInfo>({
     email: "",
     password: "",
   });
-  const entrance = (e: React.SyntheticEvent) => {
+  const entrance = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login(userInfo));
   };

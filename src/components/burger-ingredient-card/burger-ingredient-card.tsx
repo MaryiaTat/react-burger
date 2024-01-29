@@ -29,10 +29,13 @@ const BurgerIngredientCard: FC<BurgerIngredientCardProps> = ({
 }) => {
   const location = useLocation();
 
-  const idCountMap = burgerElementsId.reduce((map: any, id: string) => {
-    map.set(id, (map.get(id) || 0) + 1);
-    return map;
-  }, new Map());
+  const idCountMap = burgerElementsId.reduce(
+    (map: Map<string, number>, id: string) => {
+      map.set(id, (map.get(id) || 0) + 1);
+      return map;
+    },
+    new Map()
+  );
 
   let count = idCountMap.get(id);
   const [, dragRef] = useDrag({

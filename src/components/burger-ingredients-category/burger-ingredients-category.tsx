@@ -4,19 +4,19 @@ import styles from "./burger-ingredients-category.module.css";
 // Components
 import BurgerIngredientCard from "../burger-ingredient-card/burger-ingredient-card";
 // Constants
-import { IngredientProps } from "../../utils/types";
+import { IIngredientProps } from "../../utils/types";
 
-interface PropsT {
+interface IBurgerIngredientsCategory {
   title: string;
-  data: IngredientProps[];
+  data: IIngredientProps[];
   category: string;
   id: string;
-  innerRef: any;
+  innerRef: (node?: Element | null | undefined) => void;
   burgerElementsId: string[];
   onClickDetailInfo: (id: string) => void;
 }
 
-const BurgerIngredientsCategory: FC<PropsT> = ({
+const BurgerIngredientsCategory: FC<IBurgerIngredientsCategory> = ({
   id,
   innerRef,
   title,

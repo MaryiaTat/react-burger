@@ -14,7 +14,7 @@ import OrderLoader from "../order-loader/order-loader";
 import Modal from "../modal/modal";
 import { OnlyAuth } from "../protected-route/protected-route";
 // Utils
-import { IngredientProps, ConstructorFillingTypes } from "../../utils/types";
+import { IIngredientProps, ConstructorFillingTypes } from "../../utils/types";
 import { DragDropVariables } from "../../utils/constants";
 // Actions
 import { addConstructorIngredientBun } from "../../services/burgerConstructor/actions";
@@ -25,7 +25,7 @@ import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import styles from "./burger-constructor.module.css";
 
 interface BurgerConstructorProps {
-  ingredients: Array<IngredientProps>;
+  ingredients: Array<IIngredientProps>;
   children: JSX.Element;
 }
 

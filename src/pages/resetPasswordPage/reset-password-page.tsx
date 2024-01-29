@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from "react";
+import { FC, ChangeEvent, useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 // Components
 import Form from "../../components/form/form";
@@ -11,7 +11,7 @@ const ResetPasswordPage: FC = () => {
     password: "",
     token: "",
   });
-  const saveChanges = (e: React.SyntheticEvent) => {
+  const saveChanges = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postResetPasswordApi(userInfo).then(
       (res) => res.success && navigate("/login")

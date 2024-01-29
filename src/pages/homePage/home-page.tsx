@@ -1,8 +1,7 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 // Actions
-import { getIngredients } from "../../services/ingredients/actions";
 import { addIngredient } from "../../services/ingredientDetails/actions";
 // Components
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
@@ -13,7 +12,7 @@ import Modal from "../../components/modal/modal";
 // Styles
 import styles from "./home-page.module.css";
 // Utils
-import { IngredientProps } from "../../utils/types";
+import { IIngredientProps } from "../../utils/types";
 // Hooks
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { deleteOrder } from "../../services/order/actions";
@@ -21,15 +20,12 @@ import { clearConstructor } from "../../services/burgerConstructor/actions";
 
 const HomePage: FC = () => {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
   const { ingredients, loading } = useAppSelector((store) => store.ingredients);
   const orderNumber = useAppSelector((store) => store.order.orderNumber);
 
   const handleAddIngredient = (id: string) => {
     const ingredientInfo = ingredients?.find(
-      (el: IngredientProps) => el._id === id,
+      (el: IIngredientProps) => el._id === id
     );
     dispatch(addIngredient(ingredientInfo));
   };

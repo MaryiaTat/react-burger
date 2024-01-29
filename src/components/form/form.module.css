@@ -1,9 +1,8 @@
-/* .section {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .title {
   color: #f2f2f3;
   font-family: "Jet Brains Mono";

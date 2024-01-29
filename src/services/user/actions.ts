@@ -1,3 +1,5 @@
+import { Dispatch } from "redux";
+import { IUserInfo, IUserAllInfo, ILoginUserInfo } from "../../utils/types";
 import {
   getUserApi,
   postLoginApi,
@@ -5,44 +7,46 @@ import {
   getUpdateUserApi,
   postLogoutApi,
 } from "../../utils/burger-api";
+import { AppDispatch } from "../..";
 
 export const SET_USER = "SET_USER";
 export const SET_IS_AUTH_CHECKED = "SET_IS_AUTH_CHECKED";
 export const USER_CHANGES_LOADING = "USER_REGISTRATION_LOADING";
 export const USER_CHANGES_ERROR = "USER_REGISTRATION_ERROR";
 
-export const setUser = (payload) => ({
+export const setUser = (payload: IUserInfo | null) => ({
   type: SET_USER,
   payload,
 });
 
-export const setIsAuthChecked = (payload) => ({
+export const setIsAuthChecked = (payload: boolean) => ({
   type: SET_IS_AUTH_CHECKED,
   payload,
 });
 
 export const getUser = () => {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     return getUserApi().then((res) => dispatch(setUser(res?.user)));
   };
 };
 
-export const updateUserInfo = (userInfo) => (dispatch) => {
-  dispatch({ type: USER_CHANGES_LOADING });
-  return getUpdateUserApi(userInfo)
-    .then((res) => {
-      dispatch(setUser(res.user));
-      dispatch(setIsAuthChecked(true));
-    })
-    .catch((error) => {
-      dispatch({
-        type: USER_CHANGES_ERROR,
-        payload: error.message,
+export const updateUserInfo =
+  (userInfo: IUserAllInfo) => (dispatch: Dispatch) => {
+    dispatch({ type: USER_CHANGES_LOADING });
+    return getUpdateUserApi(userInfo)
+      .then((res) => {
+        dispatch(setUser(res.user));
+        dispatch(setIsAuthChecked(true));
+      })
+      .catch((error) => {
+        dispatch({
+          type: USER_CHANGES_ERROR,
+          payload: error.message,
+        });
       });
-    });
-};
+  };
 
-export const login = (userInfo) => (dispatch) => {
+export const login = (userInfo: ILoginUserInfo) => (dispatch: Dispatch) => {
   dispatch({ type: USER_CHANGES_LOADING });
   return postLoginApi(userInfo)
     .then((res) => {
@@ -59,13 +63,13 @@ export const login = (userInfo) => (dispatch) => {
     });
 };
 
-export const logOut = () => (dispatch) => {
+export const logOut = () => (dispatch: Dispatch) => {
   dispatch({ type: USER_CHANGES_LOADING });
   return postLogoutApi()
-    .then((res) => {
+    .then(() => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      dispatch(setUser(res.user));
+      dispatch(setUser(null));
       dispatch(setIsAuthChecked(true));
     })
     .catch((error) => {
@@ -77,7 +81,7 @@ export const logOut = () => (dispatch) => {
 };
 
 export const checkUserAuth = () => {
-  return (dispatch) => {
+  return (dispatch: AppDispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
         .catch(() => {
@@ -92,7 +96,7 @@ export const checkUserAuth = () => {
   };
 };
 
-export const register = (userInfo) => (dispatch) => {
+export const register = (userInfo: IUserAllInfo) => (dispatch: Dispatch) => {
   dispatch({ type: USER_CHANGES_LOADING });
   return postRegisterApi(userInfo)
     .then((res) => {
