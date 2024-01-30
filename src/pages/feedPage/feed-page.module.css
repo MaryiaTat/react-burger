@@ -1,7 +1,6 @@
 .article {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 .title {
   color: #f2f2f3;
@@ -16,12 +15,12 @@
   flex-direction: row;
   gap: 60px;
   justify-content: space-between;
-  max-height: calc(100vh - 215px);
 }
 .order_feed {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-width: 584px;
   width: 100%;
   overflow-y: auto;
   max-height: calc(100vh - 200px);

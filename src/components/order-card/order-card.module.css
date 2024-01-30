@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 24px;
   padding: 24px;
-  max-width: 584px;
+  max-width: 100%;
   border-radius: 40px;
   background: #1c1c21;
   box-shadow:
@@ -48,4 +48,7 @@
 }
 .ready {
   color: #0cc;
+}
+.link {
+  text-decoration: none;
 }

@@ -111,3 +111,20 @@ export interface IIngredients {
   success: boolean;
   data: Array<IIngredientProps>;
 }
+
+export interface IOrders {
+  ingredients: Array<string>;
+  name: string;
+  _id: string;
+  status: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ILiveOrdersAll {
+  success: boolean;
+  orders: Array<IOrders>;
+  total: number;
+  totalToday: number;
+}

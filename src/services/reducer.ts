@@ -4,6 +4,7 @@ import { reducer as ingredientDetailsReducer } from "./ingredientDetails/reducer
 import { reducer as constructorIngredientsReducer } from "./burgerConstructor/reducer";
 import { reducer as orderReducer } from "./order/reducer";
 import { reducer as userReducer } from "./user/reducer";
+import { reducer as LiveOrderReducer } from "./liveOrders/reducer";
 
 export const reducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -11,4 +12,7 @@ export const reducer = combineReducers({
   constructorIngredients: constructorIngredientsReducer,
   order: orderReducer,
   user: userReducer,
+  liveOrders: LiveOrderReducer,
 });
+
+export type RootState = ReturnType<typeof reducer>;

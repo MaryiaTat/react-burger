@@ -8,26 +8,16 @@ import { IIngredientProps } from "../../utils/types";
 import styles from "./images-feed.module.css";
 
 interface IImagesFeed {
-  data?: Array<string>;
+  data: Array<string>;
 }
 
 const ImagesFeed: FC<IImagesFeed> = ({ data }) => {
   const { ingredients, loading } = useAppSelector((store) => store.ingredients);
-  const testData = [
-    "643d69a5c3f7b9001cfa093c",
-    "643d69a5c3f7b9001cfa093e",
-    "643d69a5c3f7b9001cfa0942",
-    "643d69a5c3f7b9001cfa0949",
-    "643d69a5c3f7b9001cfa0948",
-    "643d69a5c3f7b9001cfa0947",
-    "643d69a5c3f7b9001cfa0945",
-    "643d69a5c3f7b9001cfa0946",
-  ];
   const map = new Map();
   ingredients.forEach((obj: IIngredientProps) => {
     map.set(obj._id, obj);
   });
-  const currentIngredients = testData.map((id) => map.get(id));
+  const currentIngredients = data.map((id) => map.get(id));
   const currentIngredientsImage = currentIngredients.map((el) => el?.image);
   const currentIngredientsPrice = currentIngredients
     .map((el) => el?.price)

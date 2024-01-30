@@ -2,6 +2,8 @@ import { FC, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 // Components
 import HomePage from "../../pages/homePage/home-page";
+import FeedPage from "../../pages/feedPage/feed-page";
+import OrderPage from "../../pages/orderPage/order-page";
 import RegisterPage from "../../pages/registerPage/register-page";
 import LoginPage from "../../pages/loginPage/login-page";
 import AppHeader from "../app-header/app-header";
@@ -10,10 +12,11 @@ import ResetPasswordPage from "../../pages/resetPasswordPage/reset-password-page
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import ProfilePage from "../../pages/profilePage/profile-page";
 import Modal from "../modal/modal";
+import ProfileOrderPage from "../../pages/profileOrderPage/profile-order-page";
 import { getIngredients } from "../../services/ingredients/actions";
 // Styles
 import styles from "./app.module.css";
-import { useAppDispatch } from "../../services/hooks";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { checkUserAuth } from "../../services/user/actions";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 
@@ -37,6 +40,8 @@ const App: FC = () => {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
+        <Route path="feed" element={<FeedPage />} />
+        <Route path="feed/:orderId" element={<OrderPage />} />
         <Route
           path="ingredients/:ingredientId"
           element={<IngredientDetails header="Детали ингредиента" />}
@@ -60,6 +65,10 @@ const App: FC = () => {
         <Route
           path="profile/*"
           element={<OnlyAuth component={<ProfilePage />} />}
+        />
+        <Route
+          path="profile/orders/:orderId"
+          element={<OnlyAuth component={<ProfileOrderPage />} />}
         />
         <Route path="*" element={<div>Страница не найдена. Ошибка 404!</div>} />
       </Routes>

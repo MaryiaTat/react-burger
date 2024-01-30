@@ -1,0 +1,71 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+}
+.number {
+  color: #f2f2f3;
+  font-family: "Iceland";
+  font-size: 1.75rem;
+  line-height: 1.5rem;
+  margin-bottom: 40px;
+  align-self: center;
+}
+.title {
+  color: #f2f2f3;
+  font-family: "Jet Brains Mono";
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.875rem;
+  margin-bottom: 12px;
+}
+.status {
+  color: #f2f2f3;
+  font-family: "Jet Brains Mono";
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 60px;
+}
+.ready {
+  color: #0cc;
+}
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  max-height: calc(100vh - 308px);
+  margin: 12px 0 40px;
+}
+.ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+.ingredients::-webkit-scrollbar-track {
+  background: inherit;
+}
+.ingredients::-webkit-scrollbar-thumb {
+  background: var(--text-inactive-color);
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.date {
+  color: #8585ad;
+  font-family: "Jet Brains Mono";
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.price_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.price {
+  font-family: "Iceland";
+  font-size: 1.75rem;
+  line-height: 1.5rem;
+  color: #f2f2f3;
+}
