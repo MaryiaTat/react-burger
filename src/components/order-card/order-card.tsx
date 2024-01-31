@@ -1,16 +1,19 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 // Components
 import ImagesFeed from "../images-feed/images-feed";
+// Constants
+import { getOrderDate, getOrderTime, getStatus } from "../../utils/utils";
 // Styles
 import styles from "./order-card.module.css";
-import { Link } from "react-router-dom";
+import { StatusConstants } from "../../utils/constants";
 
 interface IOrderCard {
   title: string;
   number: number;
   date: string;
   path: string;
-  status?: string;
+  status: StatusConstants | "";
   isStatusShown: boolean;
   ingredients: Array<string>;
 }
@@ -24,17 +27,30 @@ const OrderCard: FC<IOrderCard> = ({
   ingredients,
   isStatusShown,
 }) => {
+  const orderDate = getOrderDate(date);
+  const orderTime = getOrderTime(date);
+
+  const currentStatus = isStatusShown ? getStatus(status) : "";
+
   return (
     <Link className={styles.link} to={`/${path}/${number}`}>
       <div className={styles.wrapper}>
         <div className={styles.order_info}>
           <span className={styles.number}>#{number}</span>
-          <span className={styles.date}>{date}</span>
+          <span className={styles.date}>
+            {orderDate}, {orderTime}
+          </span>
         </div>
         <div className={styles.order_status}>
           <span className={styles.title}>{title}</span>
           {isStatusShown && (
-            <span className={`${styles.status} ${styles.ready}`}>{status}</span>
+            <span
+              className={`${styles.status} ${
+                status === StatusConstants.DONE ? styles.ready : ""
+              }`}
+            >
+              {currentStatus}
+            </span>
           )}
         </div>
         <ImagesFeed data={ingredients} />

@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent } from "react";
+import { StatusConstants } from "./constants";
 
 export interface IIngredientProps {
   _id: string;
@@ -116,10 +117,14 @@ export interface IOrders {
   ingredients: Array<string>;
   name: string;
   _id: string;
-  status: string;
+  status: StatusConstants | "";
   number: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IIngredientWithQuantity extends IIngredientProps {
+  quantity: number;
 }
 
 export interface ILiveOrdersAll {

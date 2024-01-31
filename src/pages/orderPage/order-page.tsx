@@ -1,30 +1,34 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 // Components
 import BurgerInfo from "../../components/burger-info/burger-info";
-// import OrderCard from "../../components/ingredient-group copy/order-card";
-// Actions
-import { connect, disconnect } from "../../services/liveOrders/actions";
-// Constants
-import { LIVE_ORDER_SERVER_URL_ALL } from "../../utils/burger-api";
 // Hooks
-import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import { useAppSelector } from "../../services/hooks";
 // Styles
 import styles from "./order-page.module.css";
+import { useParams } from "react-router-dom";
+import { IOrders } from "../../utils/types";
 
 const OrderPage: FC = () => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(connect(LIVE_ORDER_SERVER_URL_ALL));
-    return () => dispatch(disconnect());
-  }, [dispatch]);
+  const { orderId } = useParams();
+  const { orders } = useAppSelector((store) => store.liveOrders.data);
 
-  // const { data, status } = useAppSelector((store) => store.liveOrders);
-  // console.log(data);
-  // console.log(status);
+  const ordersMap = new Map();
+  orders.forEach((obj: IOrders) => {
+    ordersMap.set(obj.number, obj);
+  });
+  const { number, name, createdAt, ingredients, status } = ordersMap.get(
+    Number(orderId)
+  );
 
   return (
     <div className={styles.page_wrapper}>
-      <BurgerInfo />
+      <BurgerInfo
+        number={number}
+        title={name}
+        date={createdAt}
+        buregerIngredients={ingredients}
+        status={status}
+      />
     </div>
   );
 };

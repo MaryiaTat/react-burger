@@ -9,10 +9,11 @@ import {
   IIngredients,
 } from "./types";
 
-const API = "https://norma.nomoreparties.space/api";
 export const LIVE_ORDER_SERVER_URL_ALL =
   "wss://norma.nomoreparties.space/orders/all";
 
+const API = "https://norma.nomoreparties.space/api";
+const ORDER_INFO = "/orders/{number}";
 const request = <T>(url: string, options?: Record<string, any>): Promise<T> =>
   fetch(url, options).then(checkResponse<T>);
 

@@ -34,7 +34,7 @@
   flex-direction: column;
   gap: 16px;
   overflow-y: auto;
-  max-height: calc(100vh - 308px);
+  max-height: 300px;
   margin: 12px 0 40px;
 }
 .ingredients::-webkit-scrollbar {

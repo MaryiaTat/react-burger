@@ -21,3 +21,9 @@ export enum WebsocketStatus {
   ONLINE = "ONLINE",
   OFFLINE = "OFFLINE",
 }
+
+export enum StatusConstants {
+  CREATED = "created",
+  PENDING = "pending",
+  DONE = "done",
+}
