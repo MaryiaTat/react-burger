@@ -32,16 +32,18 @@ const liveOrderMiddleware = socketMiddleware({
   onMessage: liveOrderWsMessage,
 });
 
-const liveOrderUserMiddleware = socketMiddleware({
-  wsConnect: liveOrderUserConnect,
-  wsDisconnect: liveOrderUserDisonnect,
-  wsConnecting: liveOrderUserConnecting,
-  onOpen: liveOrderUserWsOpen,
-  onClose: liveOrderUserWsClose,
-  onError: liveOrderUserWsError,
-  onMessage: liveOrderUserWsMessage,
-  withTokenRefresh: true,
-});
+const liveOrderUserMiddleware = socketMiddleware(
+  {
+    wsConnect: liveOrderUserConnect,
+    wsDisconnect: liveOrderUserDisonnect,
+    wsConnecting: liveOrderUserConnecting,
+    onOpen: liveOrderUserWsOpen,
+    onClose: liveOrderUserWsClose,
+    onError: liveOrderUserWsError,
+    onMessage: liveOrderUserWsMessage,
+  },
+  true
+);
 
 export const configureStore = (initialState) => {
   const store = createStore(
@@ -58,3 +60,6 @@ export const configureStore = (initialState) => {
 
   return store;
 };
+
+// ???
+// export type State = ReturnType<typeof reducer>;

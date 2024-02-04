@@ -27,7 +27,8 @@ const ProfileOrderFeedPage: FC = () => {
   return data && status === WebsocketStatus.ONLINE ? (
     <div className={styles.page_wrapper}>
       {data?.orders
-        ?.slice(0, 20)
+        ?.slice(-20)
+        ?.reverse()
         .map(({ number, name, createdAt, status, ingredients }: IOrders) => (
           <OrderCard
             key={number}

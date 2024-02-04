@@ -123,6 +123,11 @@ export interface IOrders {
   updatedAt: string;
 }
 
+export interface ICurrentOrder {
+  success: boolean;
+  orders: IOrders;
+}
+
 export interface IIngredientWithQuantity extends IIngredientProps {
   quantity: number;
 }

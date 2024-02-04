@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // Components
 import ImagesFeed from "../images-feed/images-feed";
 // Constants
@@ -27,13 +27,18 @@ const OrderCard: FC<IOrderCard> = ({
   ingredients,
   isStatusShown,
 }) => {
+  const location = useLocation();
   const orderDate = getOrderDate(date);
   const orderTime = getOrderTime(date);
 
   const currentStatus = isStatusShown ? getStatus(status) : "";
 
   return (
-    <Link className={styles.link} to={`/${path}/${number}`}>
+    <Link
+      className={styles.link}
+      to={`/${path}/${number}`}
+      state={{ background: location }}
+    >
       <div className={styles.wrapper}>
         <div className={styles.order_info}>
           <span className={styles.number}>#{number}</span>

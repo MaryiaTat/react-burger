@@ -12,12 +12,11 @@ import ResetPasswordPage from "../../pages/resetPasswordPage/reset-password-page
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import ProfilePage from "../../pages/profilePage/profile-page";
 import Modal from "../modal/modal";
-import ProfileOrderPage from "../../pages/profileOrderPage/profile-order-page";
-import { getIngredients } from "../../services/ingredients/actions";
 // Styles
 import styles from "./app.module.css";
-import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import { useAppDispatch } from "../../services/hooks";
 import { checkUserAuth } from "../../services/user/actions";
+import { getIngredients } from "../../services/ingredients/actions";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 
 const App: FC = () => {
@@ -41,7 +40,7 @@ const App: FC = () => {
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
         <Route path="feed" element={<FeedPage />} />
-        <Route path="feed/:orderId" element={<OrderPage />} />
+        <Route path="feed/:orderId" element={<OrderPage isPage />} />
         <Route
           path="ingredients/:ingredientId"
           element={<IngredientDetails header="Детали ингредиента" />}
@@ -68,7 +67,7 @@ const App: FC = () => {
         />
         <Route
           path="profile/orders/:orderId"
-          element={<OnlyAuth component={<ProfileOrderPage />} />}
+          element={<OnlyAuth component={<OrderPage isPage />} />}
         />
         <Route path="*" element={<div>Страница не найдена. Ошибка 404!</div>} />
       </Routes>
@@ -79,6 +78,30 @@ const App: FC = () => {
             element={
               <Modal closeModal={handleModalClose} title="Детали ингредиента">
                 <IngredientDetails />
+              </Modal>
+            }
+          ></Route>
+        </Routes>
+      )}
+      {background && (
+        <Routes>
+          <Route
+            path="feed/:orderId"
+            element={
+              <Modal closeModal={handleModalClose}>
+                <OrderPage />
+              </Modal>
+            }
+          ></Route>
+        </Routes>
+      )}
+      {background && (
+        <Routes>
+          <Route
+            path="profile/orders/:orderId"
+            element={
+              <Modal closeModal={handleModalClose}>
+                <OnlyAuth component={<OrderPage />} />
               </Modal>
             }
           ></Route>

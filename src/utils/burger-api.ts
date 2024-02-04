@@ -7,13 +7,14 @@ import {
   IUpdate,
   IForgotPassword,
   IIngredients,
+  ICurrentOrder,
 } from "./types";
 
 export const LIVE_ORDER_SERVER_URL_ALL =
   "wss://norma.nomoreparties.space/orders/all";
 
 const API = "https://norma.nomoreparties.space/api";
-const ORDER_INFO = "/orders/{number}";
+
 const request = <T>(url: string, options?: Record<string, any>): Promise<T> =>
   fetch(url, options).then(checkResponse<T>);
 
@@ -69,6 +70,10 @@ export const postOrderApi = (content: {
     body: JSON.stringify(content),
   });
 };
+
+export const getCurrentOrderAPI = (
+  orderNumber: number
+): Promise<ICurrentOrder> => request(`${API}/orders/${orderNumber}`);
 
 export const postForgotPasswordApi = (content: {
   email: string;

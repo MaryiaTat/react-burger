@@ -4,12 +4,14 @@ import {
   ORDER_LOADING,
   ORDER_ERROR,
   DELETE_ORDER,
+  ORDER_SUCCESS,
 } from "./actions";
 
 export const initialState = {
   orderNumber: null,
   loading: false,
   error: null,
+  currentOrder: null,
 };
 
 export const reducer = (state = initialState, action: IAction) => {
@@ -32,6 +34,12 @@ export const reducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         orderNumber: action.payload,
+        loading: false,
+      };
+    case ORDER_SUCCESS:
+      return {
+        ...state,
+        currentOrder: action.payload,
         loading: false,
       };
     case DELETE_ORDER: {

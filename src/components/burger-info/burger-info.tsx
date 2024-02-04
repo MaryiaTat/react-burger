@@ -15,6 +15,7 @@ interface BurgerInfoProps {
   date: string;
   buregerIngredients: Array<string>;
   status: StatusConstants | "";
+  isPage?: boolean;
 }
 
 const BurgerInfo: FC<BurgerInfoProps> = ({
@@ -23,6 +24,7 @@ const BurgerInfo: FC<BurgerInfoProps> = ({
   date,
   buregerIngredients,
   status,
+  isPage,
 }) => {
   const { ingredients } = useAppSelector((store) => store.ingredients);
   const currentStatus = getStatus(status);
@@ -59,14 +61,20 @@ const BurgerInfo: FC<BurgerInfoProps> = ({
   const orderTime = getOrderTime(date);
 
   return (
-    <section className={styles.wrapper}>
+    <section
+      className={`${styles.wrapper} ${isPage ? styles.page_wrapper : ""}`}
+    >
       <span className={styles.number}>#{number}</span>
       <span className={styles.title}>{title}</span>
       <span className={`${styles.status} ${styles.ready}`}>
         {currentStatus}
       </span>
       <span className={styles.title}>Состав:</span>
-      <div className={styles.ingredients}>
+      <div
+        className={`${styles.ingredients} ${
+          isPage ? styles.ingredients_page : ""
+        }`}
+      >
         {fullBurgerDescription.map((el, index) => (
           <CompositionElement
             key={index}
