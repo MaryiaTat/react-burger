@@ -27,8 +27,8 @@ const App: FC = () => {
 
   // при входе на страницу проверяем токен доступа
   useEffect(() => {
-    dispatch(checkUserAuth());
-    dispatch(getIngredients());
+    checkUserAuth()(dispatch);
+    getIngredients()(dispatch);
   }, [dispatch]);
 
   const handleModalClose = () => {

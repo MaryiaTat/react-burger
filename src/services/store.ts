@@ -45,7 +45,7 @@ const liveOrderUserMiddleware = socketMiddleware(
   true
 );
 
-export const configureStore = (initialState) => {
+export const configureStore = (initialState: State) => {
   const store = createStore(
     reducer,
     initialState,
@@ -60,6 +60,4 @@ export const configureStore = (initialState) => {
 
   return store;
 };
-
-// ???
-// export type State = ReturnType<typeof reducer>;
+export type State = ReturnType<typeof reducer>;

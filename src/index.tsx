@@ -7,7 +7,23 @@ import App from "./components/app/app";
 import reportWebVitals from "./reportWebVitals";
 import { configureStore } from "./services/store";
 
-const store = configureStore({});
+import { initialState as ingredientsInitialState } from "./services/ingredients/reducer";
+import { initialState as ingredientDetailsInitialState } from "./services/ingredientDetails/reducer";
+import { initialState as burgerConstructorInitialState } from "./services/burgerConstructor/reducer";
+import { initialState as orderInitialState } from "./services/order/reducer";
+import { initialState as userInitialState } from "./services/user/reducer";
+import { initialState as liveOrdersInitialState } from "./services/liveOrders/reducer";
+import { initialState as liveUserOrdersInitialState } from "./services/liveUserOrders/reducer";
+
+const store = configureStore({
+  ingredients: ingredientsInitialState,
+  ingredientDetails: ingredientDetailsInitialState,
+  constructorIngredients: burgerConstructorInitialState,
+  order: orderInitialState,
+  user: userInitialState,
+  liveOrders: liveOrdersInitialState,
+  liveUserOrders: liveUserOrdersInitialState,
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

@@ -37,7 +37,7 @@ const OrderPage: FC<IOrderPage> = ({ isPage }) => {
 
   useEffect(() => {
     if (!order) {
-      dispatch(getCurrentOrder(Number(orderId)));
+      getCurrentOrder(Number(orderId))(dispatch);
     }
   }, [dispatch, orderId, order]);
 

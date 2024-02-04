@@ -9,7 +9,7 @@ export type TLiveOrderStore = {
   connectingError: string;
 };
 
-const initialState: TLiveOrderStore = {
+export const initialState: TLiveOrderStore = {
   status: WebsocketStatus.OFFLINE,
   data: null,
   connectingError: "",

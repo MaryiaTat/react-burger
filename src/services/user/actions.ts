@@ -83,7 +83,7 @@ export const logOut = () => (dispatch: Dispatch) => {
 export const checkUserAuth = () => {
   return (dispatch: AppDispatch) => {
     if (localStorage.getItem("accessToken")) {
-      dispatch(getUser())
+      getUser()(dispatch)
         .catch(() => {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");

@@ -82,7 +82,7 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
 
   const postOrderModal = () => {
     setIsUserAuth(true);
-    user && dispatch(postOrder({ ingredients: currentBurger }));
+    user && postOrder({ ingredients: currentBurger })(dispatch);
   };
   const closeLoader = () => setShowLoader(false);
 

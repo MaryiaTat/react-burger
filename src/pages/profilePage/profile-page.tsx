@@ -24,10 +24,10 @@ const ProfilePage: FC = () => {
     setUserInfo({ name: user.name, email: user.email, password: "" });
   const saveChanges = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(updateUserInfo(userInfo));
+    updateUserInfo(userInfo)(dispatch);
   };
   const logOutUser = () => {
-    dispatch(logOut());
+    logOut()(dispatch);
   };
   const pageStructure = {
     form: [
