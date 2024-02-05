@@ -7,12 +7,12 @@ import {
 } from "./actions";
 import { ConstructorFillingTypes, IAction } from "../../utils/types";
 
-interface InitialStateType {
+interface IConstructorStore {
   bun: null | string;
   constructorFilling: ConstructorFillingTypes[];
 }
 
-export const initialState: InitialStateType = {
+export const initialState: IConstructorStore = {
   bun: null,
   constructorFilling: [],
 };

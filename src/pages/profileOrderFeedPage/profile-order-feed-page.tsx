@@ -19,10 +19,9 @@ const ProfileOrderFeedPage: FC = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(connect(LIVE_USER_ORDER_SERVER_URL));
-    const unsubscribe = async () => {
+    return () => {
       dispatch(disconnect());
     };
-    unsubscribe();
   }, [dispatch, LIVE_USER_ORDER_SERVER_URL]);
 
   const { data, status } = useAppSelector((store) => store.liveUserOrders);

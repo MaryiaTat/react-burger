@@ -1,4 +1,3 @@
-import { Dispatch } from "redux";
 import { IUserInfo, IUserAllInfo, ILoginUserInfo } from "../../utils/types";
 import {
   getUserApi,
@@ -25,13 +24,13 @@ export const setIsAuthChecked = (payload: boolean) => ({
 });
 
 export const getUser = () => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     return getUserApi().then((res) => dispatch(setUser(res?.user)));
   };
 };
 
 export const updateUserInfo =
-  (userInfo: IUserAllInfo) => (dispatch: Dispatch) => {
+  (userInfo: IUserAllInfo) => (dispatch: AppDispatch) => {
     dispatch({ type: USER_CHANGES_LOADING });
     return getUpdateUserApi(userInfo)
       .then((res) => {
@@ -46,7 +45,7 @@ export const updateUserInfo =
       });
   };
 
-export const login = (userInfo: ILoginUserInfo) => (dispatch: Dispatch) => {
+export const login = (userInfo: ILoginUserInfo) => (dispatch: AppDispatch) => {
   dispatch({ type: USER_CHANGES_LOADING });
   return postLoginApi(userInfo)
     .then((res) => {
@@ -63,7 +62,7 @@ export const login = (userInfo: ILoginUserInfo) => (dispatch: Dispatch) => {
     });
 };
 
-export const logOut = () => (dispatch: Dispatch) => {
+export const logOut = () => (dispatch: AppDispatch) => {
   dispatch({ type: USER_CHANGES_LOADING });
   return postLogoutApi()
     .then(() => {
@@ -96,7 +95,7 @@ export const checkUserAuth = () => {
   };
 };
 
-export const register = (userInfo: IUserAllInfo) => (dispatch: Dispatch) => {
+export const register = (userInfo: IUserAllInfo) => (dispatch: AppDispatch) => {
   dispatch({ type: USER_CHANGES_LOADING });
   return postRegisterApi(userInfo)
     .then((res) => {

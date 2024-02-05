@@ -1,5 +1,5 @@
-import { Dispatch } from "redux";
 import { postOrderApi, getCurrentOrderAPI } from "../../utils/burger-api";
+import { AppDispatch } from "../..";
 
 export const POST_ORDER_SUCCESS = "POST_ORDER_SUCCESS";
 export const ORDER_LOADING = "ORDER_LOADING";
@@ -8,7 +8,7 @@ export const ORDER_ERROR = "ORDER_ERROR";
 export const DELETE_ORDER = "DELETE_ORDER";
 
 export const postOrder =
-  (order: { ingredients: Array<string> }) => (dispatch: Dispatch) => {
+  (order: { ingredients: Array<string> }) => (dispatch: AppDispatch) => {
     dispatch({ type: ORDER_LOADING });
     return postOrderApi(order)
       .then((res) => {
@@ -26,7 +26,7 @@ export const postOrder =
   };
 
 export const getCurrentOrder =
-  (orderNumber: number) => (dispatch: Dispatch) => {
+  (orderNumber: number) => (dispatch: AppDispatch) => {
     dispatch({ type: ORDER_LOADING });
     return getCurrentOrderAPI(orderNumber)
       .then((res) => {

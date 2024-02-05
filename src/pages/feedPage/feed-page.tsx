@@ -17,10 +17,9 @@ const FeedPage: FC = () => {
 
   useEffect(() => {
     dispatch(connect(LIVE_ORDER_SERVER_URL_ALL));
-    const unsubscribe = async () => {
+    return () => {
       dispatch(disconnect());
     };
-    unsubscribe();
   }, [dispatch]);
 
   const { data, status } = useAppSelector((store) => store.liveOrders);

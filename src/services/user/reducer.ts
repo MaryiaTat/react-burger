@@ -1,4 +1,4 @@
-import { IAction } from "../../utils/types";
+import { IAction, IUserInfo } from "../../utils/types";
 import {
   SET_USER,
   SET_IS_AUTH_CHECKED,
@@ -6,7 +6,14 @@ import {
   USER_CHANGES_ERROR,
 } from "./actions";
 
-export const initialState = {
+interface IUserStore {
+  user: IUserInfo | null;
+  loading: boolean;
+  error: string | null;
+  isAuthChecked: boolean;
+}
+
+export const initialState: IUserStore = {
   user: null,
   loading: false,
   error: null,

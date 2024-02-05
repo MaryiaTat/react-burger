@@ -21,6 +21,7 @@ import {
   wsError as liveOrderUserWsError,
   wsMessage as liveOrderUserWsMessage,
 } from "./liveUserOrders/actions";
+import { RootState } from "./reducer";
 
 const liveOrderMiddleware = socketMiddleware({
   wsConnect: liveOrderConnect,
@@ -45,7 +46,7 @@ const liveOrderUserMiddleware = socketMiddleware(
   true
 );
 
-export const configureStore = (initialState: State) => {
+export const configureStore = (initialState: RootState) => {
   const store = createStore(
     reducer,
     initialState,
@@ -60,4 +61,3 @@ export const configureStore = (initialState: State) => {
 
   return store;
 };
-export type State = ReturnType<typeof reducer>;

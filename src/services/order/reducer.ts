@@ -7,7 +7,14 @@ import {
   ORDER_SUCCESS,
 } from "./actions";
 
-export const initialState = {
+interface IOrderStore {
+  orderNumber: number | null;
+  loading: boolean;
+  error: string | null;
+  currentOrder: number | null;
+}
+
+export const initialState: IOrderStore = {
   orderNumber: null,
   loading: false,
   error: null,
