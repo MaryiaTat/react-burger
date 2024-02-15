@@ -14,7 +14,7 @@ const LoginPage: FC = () => {
   });
   const entrance = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login(userInfo));
+    login(userInfo)(dispatch);
   };
   const pageStructure = {
     title: "Вход",

@@ -5,6 +5,7 @@ import { Route, Routes, NavLink } from "react-router-dom";
 import { updateUserInfo, logOut } from "../../services/user/actions";
 // Components
 import Form from "../../components/form/form";
+import ProfileOrderFeedPage from "../profileOrderFeedPage/profile-order-feed-page";
 // Hooks
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 // Styles
@@ -23,10 +24,10 @@ const ProfilePage: FC = () => {
     setUserInfo({ name: user.name, email: user.email, password: "" });
   const saveChanges = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(updateUserInfo(userInfo));
+    updateUserInfo(userInfo)(dispatch);
   };
   const logOutUser = () => {
-    dispatch(logOut());
+    logOut()(dispatch);
   };
   const pageStructure = {
     form: [
@@ -114,10 +115,7 @@ const ProfilePage: FC = () => {
       <div className={styles.fragment}>
         <Routes>
           <Route path="/" element={<Form structure={pageStructure} />} />
-          <Route
-            path="orders"
-            element={<div>Здесь будет история заказов пользователя</div>}
-          />
+          <Route path="orders" element={<ProfileOrderFeedPage />} />
         </Routes>
       </div>
     </main>

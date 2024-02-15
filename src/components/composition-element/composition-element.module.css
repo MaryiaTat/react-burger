@@ -1,0 +1,32 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 68px 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+.image {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #801ab2;
+  background-color: #131316;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.title {
+  color: #f2f2f3;
+  font-family: "Jet Brains Mono";
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.price_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.price {
+  font-family: "Iceland";
+  font-size: 1.75rem;
+  line-height: 1.5rem;
+  color: #f2f2f3;
+}

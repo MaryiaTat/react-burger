@@ -1,0 +1,87 @@
+.article {
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  color: #f2f2f3;
+  font-family: "Jet Brains Mono";
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  margin: 40px 0 20px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  justify-content: space-between;
+}
+.order_feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 584px;
+  width: 100%;
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+}
+.order_feed_info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 60px;
+}
+.status_info {
+  display: flex;
+  flex-direction: row;
+  gap: 36px;
+}
+.status_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.status_title {
+  color: #f2f2f3;
+  font-family: "Jet Brains Mono";
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.875rem;
+}
+.numbers {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 315px;
+}
+.number {
+  color: #f2f2f3;
+  font-family: "Iceland";
+  font-size: 1.75rem;
+  line-height: 1.5rem;
+}
+.ready {
+  color: #0cc;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+}
+.info_title {
+  color: #f2f2f3;
+  font-family: "Jet Brains Mono";
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.875rem;
+}
+.info_sub_title {
+  color: #f2f2f3;
+  text-shadow:
+    0px 4px 32px rgba(51, 51, 255, 0.5),
+    0px 0px 8px rgba(51, 51, 255, 0.25),
+    0px 0px 16px rgba(51, 51, 255, 0.25);
+  font-family: "Iceland";
+  font-size: 9rem;
+  line-height: 7.5rem;
+}

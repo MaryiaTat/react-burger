@@ -15,7 +15,7 @@ const RegisterPage: FC = () => {
 
   const registerHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(register(userInfo));
+    register(userInfo)(dispatch);
   };
 
   const pageStructure = {

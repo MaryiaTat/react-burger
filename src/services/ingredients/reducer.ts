@@ -1,11 +1,17 @@
-import { IAction } from "../../utils/types";
+import { IAction, IIngredientProps } from "../../utils/types";
 import {
   GET_INGREDIENTS_SUCCESS,
   INGREDIENTS_LOADING,
   INGREDIENTS_ERROR,
 } from "./actions";
 
-export const initialState = {
+interface IIngredientsStore {
+  ingredients: Array<IIngredientProps> | [];
+  loading: boolean;
+  error: string | null;
+}
+
+export const initialState: IIngredientsStore = {
   ingredients: [],
   loading: false,
   error: null,

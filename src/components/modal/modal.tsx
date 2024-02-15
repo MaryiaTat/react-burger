@@ -28,17 +28,19 @@ const Modal: FC<ModalProps> = ({ title, children, closeModal }) => {
             className={styles.modal}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className={styles.header}>
-              <h1 className={styles.title}>{title}</h1>
-              <div className={styles.close_icon}>
-                <CloseIcon type="primary" onClick={closeModal} />
+            {title && (
+              <div className={styles.header}>
+                <h1 className={styles.title}>{title}</h1>
               </div>
-            </div>
+            )}
             {children}
+            <div className={styles.close_icon}>
+              <CloseIcon type="primary" onClick={closeModal} />
+            </div>
           </div>
           <ModalOverlay onClose={closeModal} />
         </>,
-        modalRoot,
+        modalRoot
       )
     : null;
 };

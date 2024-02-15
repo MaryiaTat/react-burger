@@ -1,7 +1,11 @@
-import { IAction } from "../../utils/types";
+import { IAction, IIngredientProps } from "../../utils/types";
 import { ADD_INGREDIENT } from "./actions";
 
-export const initialState = {
+interface IIngredientStore {
+  ingredient: IIngredientProps | null;
+}
+
+export const initialState: IIngredientStore = {
   ingredient: null,
 };
 

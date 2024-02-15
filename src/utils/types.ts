@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent } from "react";
+import { StatusConstants } from "./constants";
 
 export interface IIngredientProps {
   _id: string;
@@ -110,4 +111,30 @@ export interface IForgotPassword {
 export interface IIngredients {
   success: boolean;
   data: Array<IIngredientProps>;
+}
+
+export interface IOrders {
+  ingredients: Array<string>;
+  name: string;
+  _id: string;
+  status: StatusConstants | "";
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ICurrentOrder {
+  success: boolean;
+  orders: IOrders;
+}
+
+export interface IIngredientWithQuantity extends IIngredientProps {
+  quantity: number;
+}
+
+export interface ILiveOrdersAll {
+  success: boolean;
+  orders: Array<IOrders>;
+  total: number;
+  totalToday: number;
 }

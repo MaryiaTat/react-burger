@@ -15,3 +15,15 @@ export enum FormConstants {
   EMAIL = "email",
   PASSWORD = "password",
 }
+
+export enum WebsocketStatus {
+  CONNECTING = "CONNECTING...",
+  ONLINE = "ONLINE",
+  OFFLINE = "OFFLINE",
+}
+
+export enum StatusConstants {
+  CREATED = "created",
+  PENDING = "pending",
+  DONE = "done",
+}
