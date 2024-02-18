@@ -25,6 +25,7 @@ const Modal: FC<ModalProps> = ({ title, children, closeModal }) => {
     ? ReactDOM.createPortal(
         <>
           <div
+            data-testid="modal"
             className={styles.modal}
             onClick={(event) => event.stopPropagation()}
           >
@@ -34,7 +35,7 @@ const Modal: FC<ModalProps> = ({ title, children, closeModal }) => {
               </div>
             )}
             {children}
-            <div className={styles.close_icon}>
+            <div className={styles.close_icon} data-testid="close-icon">
               <CloseIcon type="primary" onClick={closeModal} />
             </div>
           </div>
