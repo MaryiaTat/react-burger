@@ -1,12 +1,8 @@
 describe("Constructor", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000");
-    window.localStorage.setItem(
-      "accessToken",
-      JSON.stringify("test-accessToken")
-    );
   });
-  it("open && close ingredient description", () => {
+  it("open && close ingredient description_close icon", () => {
     cy.get("#main")
       .find("div a:first")
       .click()
@@ -14,14 +10,6 @@ describe("Constructor", () => {
       .click();
   });
   it("make order", () => {
-    // window.localStorage.setItem(
-    //   "refreshToken",
-    //   JSON.stringify("test-refreshToken")
-    // );
-    window.localStorage.setItem(
-      "accessToken",
-      JSON.stringify("test-accessToken")
-    );
     cy.get("#bun")
       .find("div a:first")
       .trigger("dragstart")
