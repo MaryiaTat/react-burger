@@ -48,7 +48,11 @@ const BurgerConstructorFilling: FC<BurgerConstructorFillingProps> = ({
   });
 
   return (
-    <div className={styles.burger_filling} ref={dropRef}>
+    <div
+      className={styles.burger_filling}
+      data-testid="burger-filling"
+      ref={dropRef}
+    >
       {constructorFilling.length === 0 ? (
         <IngredientStub isOver={isOver} />
       ) : (

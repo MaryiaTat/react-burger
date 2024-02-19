@@ -15,7 +15,7 @@ const IngredientDetails: FC<IngredientDetailsProps> = ({ header }) => {
   const currentIngredient = ingredients?.find(
     (el: IIngredientProps) => el._id === ingredientId
   );
-  const { image, title, calories, proteins, fat, carbohydrates } =
+  const { image, name, calories, proteins, fat, carbohydrates } =
     currentIngredient || {};
 
   return !loading ? (
@@ -23,7 +23,7 @@ const IngredientDetails: FC<IngredientDetailsProps> = ({ header }) => {
       {header && <h2 className={styles.header}>{header}</h2>}
       <div className={styles.details}>
         <img className={styles.image} src={image} alt="" />
-        <h1 className={styles.title}>{title}</h1>
+        <h1 className={styles.title}>{name}</h1>
         <div className={styles.energy_values}>
           <div className={styles.energy_value}>
             <h4 className={styles.sub_title}>Калории, ккал</h4>

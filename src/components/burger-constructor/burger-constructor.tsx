@@ -88,7 +88,7 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
 
   return (
     <section className={styles.burger_constructor_wrapper}>
-      <div ref={dropRef}>
+      <div ref={dropRef} data-testid="burger-bun">
         {currentBun ? (
           <ConstructorElement
             type="top"
@@ -124,6 +124,7 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({
           </div>
         </div>
         <Button
+          data-testid="checkout-button"
           htmlType="button"
           type="primary"
           size="large"
