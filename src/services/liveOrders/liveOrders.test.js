@@ -1,22 +1,27 @@
 import { reducer, initialState } from "./reducer";
 import { WebsocketStatus } from "../../utils/constants";
+import {
+  LIVE_ORDER_WS_CLOSE,
+  LIVE_ORDER_WS_CONNECTING,
+  LIVE_ORDER_WS_ERROR,
+  LIVE_ORDER_WS_MESSAGE,
+  LIVE_ORDER_WS_OPEN,
+} from "./actions";
 
 describe("Live orders reducer check", () => {
   it("Should return the initial state", () => {
     expect(reducer(undefined, { type: "test" })).toEqual(initialState);
   });
   it("Connecting check", () => {
-    expect(reducer(initialState, { type: "LIVE_ORDER_WS_CONNECTING" })).toEqual(
-      {
-        ...initialState,
-        status: WebsocketStatus.CONNECTING,
-      }
-    );
+    expect(reducer(initialState, { type: LIVE_ORDER_WS_CONNECTING })).toEqual({
+      ...initialState,
+      status: WebsocketStatus.CONNECTING,
+    });
   });
   it("Open check", () => {
     expect(
       reducer(initialState, {
-        type: "LIVE_ORDER_WS_OPEN",
+        type: LIVE_ORDER_WS_OPEN,
       })
     ).toEqual({
       ...initialState,
@@ -26,7 +31,7 @@ describe("Live orders reducer check", () => {
   it("Close check", () => {
     expect(
       reducer(initialState, {
-        type: "LIVE_ORDER_WS_CLOSE",
+        type: LIVE_ORDER_WS_CLOSE,
       })
     ).toEqual({
       ...initialState,
@@ -37,7 +42,7 @@ describe("Live orders reducer check", () => {
     const mockError = "Error";
     expect(
       reducer(initialState, {
-        type: "LIVE_ORDER_WS_ERROR",
+        type: LIVE_ORDER_WS_ERROR,
         payload: mockError,
       })
     ).toEqual({
@@ -49,7 +54,7 @@ describe("Live orders reducer check", () => {
     const mockMessage = "Message";
     expect(
       reducer(initialState, {
-        type: "LIVE_ORDER_WS_MESSAGE",
+        type: LIVE_ORDER_WS_MESSAGE,
         payload: mockMessage,
       })
     ).toEqual({
